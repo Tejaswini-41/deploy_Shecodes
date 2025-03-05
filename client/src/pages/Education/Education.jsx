@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
+import { workshops } from '../../data/workshops';
 import './Education.css';
 
 const Education = () => {
@@ -87,23 +88,6 @@ const Education = () => {
     }
   ];
 
-  const workshops = [
-    {
-      title: "Personal Branding Workshop",
-      date: "March 15, 2024",
-      time: "10:00 AM - 1:00 PM",
-      instructor: "Sarah Johnson",
-      spots: 30
-    },
-    {
-      title: "Tech Interview Preparation",
-      date: "March 20, 2024",
-      time: "2:00 PM - 5:00 PM",
-      instructor: "Emily Chen",
-      spots: 25
-    }
-  ];
-
   return (
     <div className="education-container">
       <Navbar />
@@ -155,15 +139,26 @@ const Education = () => {
           <div className="workshops-grid">
             {workshops.map((workshop, index) => (
               <div key={index} className="workshop-card">
+                <div className="workshop-image">
+                  <img src={workshop.image} alt={workshop.title} />
+                  <span className="workshop-price">{workshop.price}</span>
+                </div>
                 <div className="workshop-content">
                   <h3>{workshop.title}</h3>
+                  <p className="workshop-description">{workshop.description}</p>
                   <div className="workshop-info">
                     <p><i className="far fa-calendar"></i> {workshop.date}</p>
                     <p><i className="far fa-clock"></i> {workshop.time}</p>
+                    <p><i className="fas fa-map-marker-alt"></i> {workshop.location}</p>
                     <p><i className="fas fa-chalkboard-teacher"></i> {workshop.instructor}</p>
                     <p><i className="fas fa-user-friends"></i> {workshop.spots} spots available</p>
                   </div>
-                  <button className="register-btn">Register Now</button>
+                  <button 
+                    className="register-btn" 
+                    onClick={() => window.open(workshop.url, '_blank')}
+                  >
+                    Register Now
+                  </button>
                 </div>
               </div>
             ))}

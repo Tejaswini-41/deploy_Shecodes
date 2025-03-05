@@ -47,7 +47,8 @@ const Entrepreneurship = () => {
       amount: "$50,000",
       deadline: "April 30, 2024",
       type: "Grant",
-      eligibility: ["Women-owned business", "Tech startups", "Early-stage"]
+      eligibility: ["Women-owned business", "Tech startups", "Early-stage"],
+      link: "https://opportunitiesforyouth.org/2023/09/24/funding-opportunities-for-organizations-interested-in-making-a-meaningful-impact/"
     },
     {
       title: "Startup Accelerator Program",
@@ -55,7 +56,26 @@ const Entrepreneurship = () => {
       amount: "$120,000",
       deadline: "May 15, 2024",
       type: "Investment",
-      eligibility: ["Tech startups", "Female founders", "MVP ready"]
+      eligibility: ["Tech startups", "Female founders", "MVP ready"],
+      link: "https://www.startupindia.gov.in/content/sih/en/women_entrepreneurs.html"
+    },
+    {
+      title: "DPIIT Women Entrepreneurship Program",
+      organization: "Startup India",
+      amount: "₹5,00,000",
+      deadline: "June 30, 2024",
+      type: "Grant",
+      eligibility: ["Indian Women Entrepreneurs", "Registered Business", "Innovation Focus"],
+      link: "https://www.startupindia.gov.in/content/sih/en/government-schemes.html"
+    },
+    {
+      title: "NITI Aayog Women Transform",
+      organization: "Government of India",
+      amount: "₹10,00,000",
+      deadline: "July 15, 2024",
+      type: "Grant + Mentorship",
+      eligibility: ["Women-led startups", "Social Impact", "Technology Focus"],
+      link: "https://wep.gov.in/"
     }
   ];
 
@@ -64,7 +84,7 @@ const Entrepreneurship = () => {
       name: "Nirmala Sitharaman",
       role: "Finance Minister of India",
       company: "Government of India",
-      image: "/Images/business/nirmala-sitharaman.jpg",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMyyRuxuPKjQOr0sCIXaMwAuBJdDzTnH9vRg&s",
       description: "First full-time female Finance Minister of India. Known for her strategic economic policies and reforms.",
       achievements: [
         "Union Finance Minister since 2019",
@@ -77,7 +97,7 @@ const Entrepreneurship = () => {
       name: "Nita Ambani",
       role: "Founder & Chairperson",
       company: "Reliance Foundation",
-      image: "/Images/business/nita-ambani.jpg",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQINZf4irIJR7onj-2O3GE3jgJ5SyocQeSLsw&s",
       description: "A business leader, sports administrator, and philanthropist who has transformed education and sports in India.",
       achievements: [
         "First Indian woman to become IOC member",
@@ -90,25 +110,25 @@ const Entrepreneurship = () => {
       name: "Namita Thapar",
       role: "Executive Director",
       company: "Emcure Pharmaceuticals",
-      image: "/Images/business/namita-thapar.jpg",
+      image: "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRU5Ac5iG_y-jz1quwSSb6VlQrNmp_7-3Z9YHbiCAcG1V9fuKZPLWp5MvqeUIr_39COGJ1KLxUuXqyP_Fd1uiJBnuYFXWuRRJ4I8DZ1Kg",
       description: "Leading voice in Indian pharmaceutical industry and champion of women entrepreneurship.",
       achievements: [
-        "Shark Tank India Judge",
+        "Executive Director of Emcure Pharmaceuticals",
         "CEO of Emcure Pharmaceuticals",
+        "Shark Tank India judge",
         "Young Global Leader - World Economic Forum",
-        "Advocates for women's health"
+        "Advocate for women's health and entrepreneurship",
+        "Recipient of multiple business awards"
       ]
     },
     {
       name: "Vineeta Singh",
       role: "CEO & Co-founder",
       company: "SUGAR Cosmetics",
-      image: "/Images/business/vineeta-singh.jpg",
-      description: "Built SUGAR into one of India's fastest-growing beauty brands, focusing on millennial women.",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4Eplr6JQDKa20tjSX5-eWnI_9AlP8bLSLTQ&s",
+      description: "CEO & Co-founder of SUGAR Cosmetics, one of India's fastest-growing beauty brands, focusing on millennial women.",
       achievements: [
-        "Built ₹500+ crore beauty brand",
-        "IIM-A alumnus",
-        "Featured in Forbes Asia 30 Under 30",
+        "Forbes 30 Under 30",
         "Shark Tank India Judge"
       ]
     }
@@ -142,31 +162,30 @@ const Entrepreneurship = () => {
         </div>
 
         <div className="content-tabs">
-          {/* <button 
+          {/* <button
             className={`tab-btn ${activeTab === 'resources' ? 'active' : ''}`}
             onClick={() => setActiveTab('resources')}
           >
             Resources
-          </button> */}
-          {/* <button 
+          </button>
+          <button
             className={`tab-btn ${activeTab === 'mentorship' ? 'active' : ''}`}
             onClick={() => setActiveTab('mentorship')}
           >
             Mentorship
           </button> */}
-                    <button 
+          <button
             className={`tab-btn ${activeTab === 'leaders' ? 'active' : ''}`}
             onClick={() => setActiveTab('leaders')}
           >
             Business Leaders
           </button>
-          <button 
+          <button
             className={`tab-btn ${activeTab === 'funding' ? 'active' : ''}`}
             onClick={() => setActiveTab('funding')}
           >
             Funding
           </button>
-
         </div>
 
         {activeTab === 'resources' && (
@@ -237,7 +256,14 @@ const Entrepreneurship = () => {
                       </ul>
                     </div>
                     <p className="deadline">Deadline: {opportunity.deadline}</p>
-                    <button className="apply-btn">Apply Now</button>
+                    <a
+                      href={opportunity.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="apply-btn"
+                    >
+                      Apply Now <i className="fas fa-external-link-alt"></i>
+                    </a>
                   </div>
                 </div>
               ))}

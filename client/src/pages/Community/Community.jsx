@@ -132,39 +132,59 @@ const Community = () => {
     });
   };
 
-  // Submit mentor form
+  // Fix the handleMentorSubmit function
   const handleMentorSubmit = async (e) => {
     e.preventDefault();
     
     try {
       setLoading(true);
+      setError(null); // Clear any previous errors
       
-      // Create new mentor object
+      // Process expertise from string to array
+      const expertiseArray = mentorForm.expertise
+        .split(',')
+        .map(item => item.trim())
+        .filter(item => item !== '');
+      
+      // Create new mentor object with processed expertise
       const mentorData = {
         ...mentorForm,
-        // Note: the backend will handle converting expertise to array
+        expertise: expertiseArray
       };
       
-      // Send data to backend
-      const response = await axios.post(API_URL, mentorData);
+      console.log('Submitting mentor data to server:', mentorData);
       
-      // Add new mentor to the list
-      setMentors([...mentors, response.data]);
+      const response = await axios.post(MENTOR_API_URL, mentorData);
       
-      // Reset form and hide it
-      setMentorForm({
-        name: '',
-        role: '',
-        company: '',
-        expertise: '',
-        availability: '',
-        avatar: '/Images/mentors/default.jpg'
-      });
+      if (response.data) {
+        console.log('✅ Mentor created successfully:', response.data);
+        
+        // Add new mentor to the list
+        setMentors(prevMentors => [...prevMentors, response.data]);
+        
+        // Reset form and hide it
+        setMentorForm({
+          name: '',
+          role: '',
+          company: '',
+          expertise: '',
+          availability: '',
+          avatar: '/Images/mentors/default.jpg'
+        });
+        
+        setShowMentorForm(false);
+        
+        // Show success message
+        alert('Mentor profile created successfully!');
+      } else {
+        throw new Error('No data received from server');
+      }
       
-      setShowMentorForm(false);
     } catch (err) {
-      console.error('Error creating mentor:', err);
-      setError('Failed to create mentor. Please try again.');
+      console.error('❌ Error creating mentor:', err);
+      const errorMessage = err.response?.data?.message || err.message || 'Failed to create mentor';
+      setError(errorMessage);
+      alert(`Failed to create mentor: ${errorMessage}`);
     } finally {
       setLoading(false);
     }

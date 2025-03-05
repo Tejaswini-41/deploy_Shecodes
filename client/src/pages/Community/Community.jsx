@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
 import './Community.css';
+
+const API_URL = 'http://localhost:5000/api/mentors';
 
 const Community = () => {
   const [activeTab, setActiveTab] = useState('discussions');
@@ -12,16 +15,16 @@ const Community = () => {
   
   // Add state for dynamic data
   const [discussions, setDiscussions] = useState([
-    // ... existing discussions data
+    // Your existing discussions data can stay here for now
   ]);
 
-  const [mentors, setMentors] = useState([
-    // ... existing mentors data
-  ]);
-
+  const [mentors, setMentors] = useState([]);
   const [events, setEvents] = useState([
-    // ... existing events data
+    // Your existing events data can stay here for now
   ]);
+  
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   // Form state for mentor
   const [mentorForm, setMentorForm] = useState({
@@ -51,6 +54,28 @@ const Community = () => {
     author: 'Current User', // Would typically come from authentication
     avatar: '/Images/avatars/default.jpg'
   });
+
+  // Fetch mentors from API when component mounts or tab changes to mentorship
+  useEffect(() => {
+    if (activeTab === 'mentorship') {
+      fetchMentors();
+    }
+  }, [activeTab]);
+
+  // Function to fetch mentors
+  const fetchMentors = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await axios.get(API_URL);
+      setMentors(response.data);
+    } catch (err) {
+      console.error('Error fetching mentors:', err);
+      setError('Failed to load mentors. Please try again later.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // Handle mentor form input changes
   const handleMentorInputChange = (e) => {
@@ -88,37 +113,44 @@ const Community = () => {
   };
 
   // Submit mentor form
-  const handleMentorSubmit = (e) => {
+  const handleMentorSubmit = async (e) => {
     e.preventDefault();
     
-    // Process expertise from string to array
-    const expertiseArray = mentorForm.expertise
-      .split(',')
-      .map(item => item.trim())
-      .filter(item => item !== '');
-    
-    // Create new mentor object
-    const newMentor = {
-      ...mentorForm,
-      expertise: expertiseArray
-    };
-    
-    // Add new mentor to the list
-    setMentors([...mentors, newMentor]);
-    
-    // Reset form and hide it
-    setMentorForm({
-      name: '',
-      role: '',
-      company: '',
-      expertise: '',
-      availability: '',
-      avatar: '/Images/mentors/default.jpg'
-    });
-    setShowMentorForm(false);
+    try {
+      setLoading(true);
+      
+      // Create new mentor object
+      const mentorData = {
+        ...mentorForm,
+        // Note: the backend will handle converting expertise to array
+      };
+      
+      // Send data to backend
+      const response = await axios.post(API_URL, mentorData);
+      
+      // Add new mentor to the list
+      setMentors([...mentors, response.data]);
+      
+      // Reset form and hide it
+      setMentorForm({
+        name: '',
+        role: '',
+        company: '',
+        expertise: '',
+        availability: '',
+        avatar: '/Images/mentors/default.jpg'
+      });
+      
+      setShowMentorForm(false);
+    } catch (err) {
+      console.error('Error creating mentor:', err);
+      setError('Failed to create mentor. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
-  // Submit event form
+  // Submit event form (keeping this as is for now since we're only implementing mentors)
   const handleEventSubmit = (e) => {
     e.preventDefault();
     
@@ -143,7 +175,7 @@ const Community = () => {
     setShowEventForm(false);
   };
 
-  // Submit discussion form
+  // Submit discussion form (keeping this as is for now since we're only implementing mentors)
   const handleDiscussionSubmit = (e) => {
     e.preventDefault();
     
@@ -206,6 +238,10 @@ const Community = () => {
           </button>
         </div>
 
+        {loading && <div className="loading">Loading...</div>}
+        {error && <div className="error-message">{error}</div>}
+
+        {/* Original Discussion Tab Content */}
         {activeTab === 'discussions' && (
           <section className="discussions-section">
             <div className="section-header">
@@ -218,7 +254,6 @@ const Community = () => {
               </button>
             </div>
             
-            {/* Discussion Form Modal */}
             {showDiscussionForm && (
               <div className="modal-overlay">
                 <div className="modal-content">
@@ -291,6 +326,7 @@ const Community = () => {
           </section>
         )}
 
+        {/* Updated Mentorship Tab Content - Connected to Backend */}
         {activeTab === 'mentorship' && (
           <section className="mentorship-section">
             <div className="section-header">
@@ -303,7 +339,6 @@ const Community = () => {
               </button>
             </div>
             
-            {/* Mentor Form Modal */}
             {showMentorForm && (
               <div className="modal-overlay">
                 <div className="modal-content">
@@ -363,7 +398,9 @@ const Community = () => {
                     </div>
                     <div className="form-actions">
                       <button type="button" onClick={() => setShowMentorForm(false)}>Cancel</button>
-                      <button type="submit">Submit</button>
+                      <button type="submit" disabled={loading}>
+                        {loading ? 'Submitting...' : 'Submit'}
+                      </button>
                     </div>
                   </form>
                 </div>
@@ -371,28 +408,33 @@ const Community = () => {
             )}
             
             <div className="mentors-grid">
-              {mentors.map((mentor, index) => (
-                <div key={index} className="mentor-card">
-                  <div className="mentor-header">
-                    <img src={mentor.avatar} alt={mentor.name} />
-                    <div className="mentor-status">{mentor.availability}</div>
-                  </div>
-                  <div className="mentor-info">
-                    <h3>{mentor.name}</h3>
-                    <p className="mentor-role">{mentor.role} at {mentor.company}</p>
-                    <div className="mentor-expertise">
-                      {mentor.expertise.map((skill, i) => (
-                        <span key={i} className="expertise-tag">{skill}</span>
-                      ))}
+              {mentors.length === 0 && !loading ? (
+                <div className="no-mentors">No mentors available yet. Be the first!</div>
+              ) : (
+                mentors.map((mentor, index) => (
+                  <div key={index} className="mentor-card">
+                    <div className="mentor-header">
+                      <img src={mentor.avatar} alt={mentor.name} />
+                      <div className="mentor-status">{mentor.availability}</div>
                     </div>
-                    <button className="connect-btn">Connect</button>
+                    <div className="mentor-info">
+                      <h3>{mentor.name}</h3>
+                      <p className="mentor-role">{mentor.role} at {mentor.company}</p>
+                      <div className="mentor-expertise">
+                        {mentor.expertise.map((skill, i) => (
+                          <span key={i} className="expertise-tag">{skill}</span>
+                        ))}
+                      </div>
+                      <button className="connect-btn">Connect</button>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))
+              )}
             </div>
           </section>
         )}
 
+        {/* Original Events Tab Content */}
         {activeTab === 'events' && (
           <section className="events-section">
             <div className="section-header">
@@ -405,7 +447,6 @@ const Community = () => {
               </button>
             </div>
             
-            {/* Event Form Modal */}
             {showEventForm && (
               <div className="modal-overlay">
                 <div className="modal-content">

@@ -8,25 +8,44 @@ const Leadership = () => {
 
   const leaderSpotlights = [
     {
-      name: "Kiran Mazumdar Shaw",
-      role: "Founder & CEO, Biocon",
-      image: "/Images/leaders/kiran.jpg",
-      quote: "I faced a lot of rejection initially, but I persevered.",
-      achievements: [
-        "First Indian woman to reach $1B net worth",
-        "Padma Bhushan recipient",
-        "Building Asia's largest biopharmaceutical company"
-      ]
-    },
-    {
       name: "Falguni Nayar",
       role: "Founder & CEO, Nykaa",
-      image: "/Images/leaders/falguni.jpg",
+      image: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSbE7x4MzDqFMkKcKAhgNHZ_hLtNBnpA-S5pKMpihU28onujnecjOud1oZHiVGQ924bTJIzE8H4bUSsZ-5gPUGpNIwEQtwDwlT8QhZkh5Y",
       quote: "Age is just a number when it comes to entrepreneurship.",
       achievements: [
         "Built India's leading beauty retail platform",
         "Former investment banker turned entrepreneur",
         "Created a billion-dollar beauty empire"
+      ]
+    },
+    {
+      name: "Tejaswini Durge",
+      role: "Student at VIIT",
+      image: "https://media.licdn.com/dms/image/v2/D4D22AQE3t-Ga8sfKYA/feedshare-shrink_800/B4DZVVK5tBGcAg-/0/1740890726030?e=1744243200&v=beta&t=47heRQ2TDbDXqtCXFJ53_zHMsf_cGNUIBvR_MNrq20k",
+      quote: "Leadership is not about being in charge. It is about taking care of those in your charge.",
+      achievements: [
+        "Batch Representative",
+        "AI Enthusiast"
+      ]
+    },
+    {
+      name: "Gauri Karkhile",
+      role: "Student at VIIT",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOsQSa4kYWSDV0gE9hhLhhx1enDsiLHlQ9AdyqWU_fA1XVND0e6VHbMlaceOIGeT7YnnQ&usqp=CAU",
+      quote: "The best way to predict the future is to create it.",
+      achievements: [
+        "Active participant in college events",
+        "Aspiring leader"
+      ]
+    },
+    {
+      name: "Sanika Boke",
+      role: "Student at VIIT",
+      image: "https://media.licdn.com/dms/image/v2/D4D22AQGG8B0UuwZBzA/feedshare-shrink_1280/B4DZVR40rjG8Ao-/0/1740835612236?e=1744243200&v=beta&t=IFNO7MiInGKGPODDkT6a_fQukxq5uCyKZQGRrMe2OCA",
+      quote: "Success is not the key to happiness. Happiness is the key to success.",
+      achievements: [
+        "Member of various student clubs",
+        "Leadership enthusiast"
       ]
     }
   ];

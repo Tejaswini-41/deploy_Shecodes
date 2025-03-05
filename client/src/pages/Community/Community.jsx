@@ -96,7 +96,13 @@ const Community = () => {
         setLoading(false);
       }
     };
-
+    
+    // Add useEffect for events
+    useEffect(() => {
+      if (activeTab === 'events') {
+        fetchEvents();
+      }
+    }, [activeTab]);
   // Handle mentor form input changes
   const handleMentorInputChange = (e) => {
     const { name, value } = e.target;
@@ -191,28 +197,54 @@ const Community = () => {
   };
 
   // Submit event form (keeping this as is for now since we're only implementing mentors)
-  const handleEventSubmit = (e) => {
+  const handleEventSubmit = async (e) => {
     e.preventDefault();
     
-    // Create new event object
-    const newEvent = {
-      ...eventForm,
-      attendees: Number(eventForm.attendees) || 0
-    };
-    
-    // Add new event to the list
-    setEvents([...events, newEvent]);
-    
-    // Reset form and hide it
-    setEventForm({
-      title: '',
-      date: '',
-      time: '',
-      location: '',
-      attendees: 0,
-      image: '/Images/events/default.jpg'
-    });
-    setShowEventForm(false);
+    try {
+      setLoading(true);
+      setError(null);
+      
+      const eventData = {
+        ...eventForm,
+        attendees: Number(eventForm.attendees) || 0
+      };
+      
+      console.log('Submitting event data to server:', eventData);
+      
+      const response = await axios.post(EVENT_API_URL, eventData);
+      
+      if (response.data) {
+        console.log('✅ Event created successfully:', response.data);
+        
+        // Add new event to the list
+        setEvents(prevEvents => [...prevEvents, response.data]);
+        
+        // Reset form and hide it
+        setEventForm({
+          title: '',
+          date: '',
+          time: '',
+          location: '',
+          attendees: 0,
+          image: '/Images/events/default.jpg'
+        });
+        
+        setShowEventForm(false);
+        
+        // Show success message
+        alert('Event created successfully!');
+      } else {
+        throw new Error('No data received from server');
+      }
+      
+    } catch (err) {
+      console.error('❌ Error creating event:', err);
+      const errorMessage = err.response?.data?.message || err.message || 'Failed to create event';
+      setError(errorMessage);
+      alert(`Failed to create event: ${errorMessage}`);
+    } finally {
+      setLoading(false);
+    }
   };
 
   // Submit discussion form (keeping this as is for now since we're only implementing mentors)

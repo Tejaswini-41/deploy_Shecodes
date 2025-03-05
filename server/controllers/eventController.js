@@ -3,12 +3,12 @@ import Event from '../models/Event.js';
 // Get all events
 export const getEvents = async (req, res) => {
   try {
-    console.log('Fetching all events from database...');
-    const events = await Event.find({}).sort({ date: 1 }); // Sort by date ascending
-    console.log(`Successfully fetched ${events.length} events`);
+    console.log('Fetching all events...');
+    const events = await Event.find({}).sort({ date: 1 });
+    console.log(`✅ Successfully fetched ${events.length} events`);
     res.json(events);
   } catch (error) {
-    console.error('Error fetching events:', error.message);
+    console.error('❌ Error fetching events:', error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -16,7 +16,8 @@ export const getEvents = async (req, res) => {
 // Create a new event
 export const createEvent = async (req, res) => {
   try {
-    console.log('Creating a new event with data:', req.body);
+    console.log('Received event data:', req.body);
+    
     const { title, date, time, location, attendees, image } = req.body;
     
     const event = new Event({
@@ -28,11 +29,13 @@ export const createEvent = async (req, res) => {
       image: image || '/Images/events/default.jpg'
     });
 
+    console.log('Created event object:', event);
+    
     const createdEvent = await event.save();
-    console.log('✅ Event successfully saved to database with ID:', createdEvent._id);
+    console.log('✅ Event saved to database:', createdEvent);
     res.status(201).json(createdEvent);
   } catch (error) {
-    console.error('❌ Error saving event to database:', error.message);
+    console.error('❌ Error in createEvent:', error);
     res.status(400).json({ message: error.message });
   }
 };

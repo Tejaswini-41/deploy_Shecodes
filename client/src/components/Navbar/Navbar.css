@@ -187,6 +187,28 @@
   font-size: 1.1rem;
 }
 
+.profile-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(45deg, #e0218a, #ff69b4);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+}
+
+.profile-btn:hover {
+  background: linear-gradient(45deg, #ff69b4, #e0218a);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(224, 33, 138, 0.2);
+}
+
 @media (max-width: 768px) {
   .nav-links {
     gap: 1rem;

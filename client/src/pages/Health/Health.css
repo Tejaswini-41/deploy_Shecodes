@@ -14,13 +14,16 @@
 .health-hero {
   text-align: center;
   padding: 6rem 2rem;
-  background: linear-gradient(rgba(224, 33, 138, 0.85), rgba(224, 33, 138, 0.7)),
-              url('/Images/health/hero-bg.jpg');
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.5), 
+    rgba(224, 33, 138, 0.7)
+  ), url('/Images/background.png');
   background-size: cover;
   background-position: center;
   color: white;
   border-radius: 12px;
   margin: 2rem 0 3rem 0;
+  box-shadow: 0 4px 20px rgba(224, 33, 138, 0.2);
 }
 
 .health-navigation {

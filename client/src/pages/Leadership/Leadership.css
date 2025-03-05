@@ -18,8 +18,10 @@
 .leadership-hero {
   text-align: center;
   padding: 6rem 2rem;
-  background: linear-gradient(rgba(224, 33, 138, 0.85), rgba(224, 33, 138, 0.7)),
-              url('/Images/leadership/hero-bg.jpg');
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.5), 
+    rgba(224, 33, 138, 0.7)
+  ), url('/Images/background.png');  /* Updated to match landing page background */
   background-size: cover;
   background-position: center;
   color: white;

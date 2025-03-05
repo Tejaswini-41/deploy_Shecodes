@@ -1,0 +1,221 @@
+.health-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+}
+
+.health-page {
+  flex: 1;
+  padding: 0 2rem 4rem 2rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.health-hero {
+  text-align: center;
+  padding: 6rem 2rem;
+  background: linear-gradient(rgba(224, 33, 138, 0.85), rgba(224, 33, 138, 0.7)),
+              url('/Images/health/hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  border-radius: 12px;
+  margin: 2rem 0 3rem 0;
+}
+
+.health-navigation {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.nav-btn {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: #f0f0f0;
+  color: #666;
+}
+
+.nav-btn.active {
+  background: #e0218a;
+  color: white;
+}
+
+.cycle-phases {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.phase-card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.phase-card:hover {
+  transform: translateY(-5px);
+}
+
+.phase-icon {
+  font-size: 2.5rem;
+  color: #e0218a;
+  margin-bottom: 1rem;
+}
+
+.duration {
+  display: inline-block;
+  background: rgba(224, 33, 138, 0.1);
+  color: #e0218a;
+  padding: 0.3rem 1rem;
+  border-radius: 15px;
+  font-size: 0.9rem;
+  margin: 0.5rem 0;
+}
+
+.phase-tips {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+  margin-top: 1rem;
+}
+
+.phase-tips li {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.phase-tips li::before {
+  content: "•";
+  color: #e0218a;
+  position: absolute;
+  left: 0;
+}
+
+.hygiene-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.hygiene-card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.guide-icon {
+  font-size: 2rem;
+  color: #e0218a;
+  margin-bottom: 1rem;
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.video-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.video-thumbnail {
+  position: relative;
+  height: 200px;
+}
+
+.video-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+  background: rgba(224, 33, 138, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.play-button:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.video-info {
+  padding: 1.5rem;
+}
+
+.health-resources {
+  margin-top: 4rem;
+  text-align: center;
+}
+
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.resource-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  color: #333;
+  transition: transform 0.3s ease;
+}
+
+.resource-link i {
+  font-size: 2rem;
+  color: #e0218a;
+}
+
+.resource-link:hover {
+  transform: translateY(-5px);
+}
+
+@media (max-width: 768px) {
+  .health-page {
+    padding: 0 1rem 3rem 1rem;
+  }
+
+  .health-navigation {
+    flex-direction: column;
+  }
+
+  .nav-btn {
+    width: 100%;
+  }
+}

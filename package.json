@@ -1,0 +1,19 @@
+{
+  "name": "shecodes",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "cd server && npm i && nodemon index.js",
+    "client": "cd client && npm i && npm run dev",
+    "dev": "concurrently -k  \"npm run server\" \"npm run client\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

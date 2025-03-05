@@ -1,0 +1,241 @@
+.tech-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+}
+
+.tech-page {
+  flex: 1;
+  padding: 0 2rem 4rem 2rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.tech-hero {
+  text-align: center;
+  padding: 6rem 2rem;
+  background: linear-gradient(rgba(224, 33, 138, 0.85), rgba(224, 33, 138, 0.7)),
+              url('/Images/tech-hero.jpg');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  border-radius: 12px;
+  margin: 2rem 0 3rem 0;
+}
+
+.tech-hero h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.tech-hero p {
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.jobs-section,
+.bootcamps-section,
+.resources-section {
+  margin-bottom: 4rem;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.job-filters {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.filter-btn {
+  padding: 0.8rem 1.5rem;
+  border: 1px solid #e0218a;
+  border-radius: 25px;
+  background: transparent;
+  color: #e0218a;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+  background: #e0218a;
+  color: white;
+}
+
+.jobs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.job-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.job-card:hover {
+  transform: translateY(-5px);
+}
+
+.job-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.company-logo {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+.job-type {
+  background: rgba(224, 33, 138, 0.1);
+  color: #e0218a;
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+}
+
+.job-details {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.skill-tag {
+  background: #f0f0f0;
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+}
+
+.bootcamps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.bootcamp-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.bootcamp-image img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.bootcamp-content {
+  padding: 1.5rem;
+}
+
+.bootcamp-details,
+.bootcamp-stats {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.resource-card {
+  text-align: center;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.resource-card:hover {
+  transform: translateY(-5px);
+}
+
+.resource-card i {
+  font-size: 2.5rem;
+  color: #e0218a;
+  margin-bottom: 1rem;
+}
+
+.resource-link {
+  color: #e0218a;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.apply-btn,
+.enroll-btn {
+  width: 100%;
+  padding: 0.8rem;
+  background: #e0218a;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 1rem;
+}
+
+.apply-btn:hover,
+.enroll-btn:hover {
+  background: #ff69b4;
+}
+
+@media (max-width: 768px) {
+  .tech-page {
+    padding: 0 1rem 3rem 1rem;
+  }
+
+  .tech-hero {
+    padding: 4rem 1.5rem;
+  }
+
+  .tech-hero h1 {
+    font-size: 2rem;
+  }
+
+  .job-filters {
+    flex-wrap: wrap;
+  }
+
+  .jobs-grid,
+  .bootcamps-grid {
+    grid-template-columns: 1fr;
+  }
+}

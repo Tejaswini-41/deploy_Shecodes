@@ -1,0 +1,153 @@
+.entrepreneurship-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+}
+
+.entrepreneurship-page {
+  flex: 1;
+  padding: 0 2rem 4rem 2rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.entrepreneurship-hero {
+  text-align: center;
+  padding: 6rem 2rem;
+  background: linear-gradient(rgba(224, 33, 138, 0.85), rgba(224, 33, 138, 0.7)),
+              url('/Images/entrepreneurship/hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  border-radius: 12px;
+  margin: 2rem 0 3rem 0;
+}
+
+.quick-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.stat-card {
+  text-align: center;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card i {
+  font-size: 2.5rem;
+  color: #e0218a;
+  margin-bottom: 1rem;
+}
+
+.content-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.tab-btn {
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: #f0f0f0;
+  color: #666;
+}
+
+.tab-btn.active {
+  background: #e0218a;
+  color: white;
+}
+
+.resources-grid,
+.mentors-grid,
+.opportunities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.resource-card,
+.mentor-card,
+.opportunity-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.resource-card:hover,
+.mentor-card:hover,
+.opportunity-card:hover {
+  transform: translateY(-5px);
+}
+
+.expertise-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.expertise-tag {
+  background: rgba(224, 33, 138, 0.1);
+  color: #e0218a;
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+}
+
+.cta-section {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: linear-gradient(rgba(224, 33, 138, 0.05), rgba(224, 33, 138, 0.1));
+  border-radius: 12px;
+  margin-top: 4rem;
+}
+
+.schedule-call-btn {
+  padding: 1rem 2rem;
+  background: #e0218a;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1.5rem;
+}
+
+.schedule-call-btn:hover {
+  background: #ff69b4;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .entrepreneurship-page {
+    padding: 0 1rem 3rem 1rem;
+  }
+
+  .quick-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .content-tabs {
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    flex: 1;
+    min-width: 120px;
+  }
+}

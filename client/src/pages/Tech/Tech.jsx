@@ -14,7 +14,7 @@ const Tech = () => {
       type: "Full-time",
       experience: "3-5 years",
       skills: ["React", "Node.js", "Cloud"],
-      logo: "/Images/companies/google.png",
+      logo: "https://logos-world.net/wp-content/uploads/2020/09/Google-Logo-2010-2013.jpg",
       category: "engineering"
     },
     {
@@ -24,8 +24,38 @@ const Tech = () => {
       type: "Full-time",
       experience: "2-4 years",
       skills: ["UI/UX", "Figma", "User Research"],
-      logo: "/Images/companies/microsoft.png",
+      logo: "https://logos-world.net/wp-content/uploads/2020/09/Microsoft-Logo-2012-present.jpg",
       category: "design"
+    },
+    {
+      company: "Amazon",
+      role: "Frontend Developer",
+      location: "Remote",
+      type: "Full-time",
+      experience: "2-3 years",
+      skills: ["React", "TypeScript", "CSS"],
+      logo: "https://logos-world.net/wp-content/uploads/2020/04/Amazon-Logo.png",
+      category: "engineering"
+    },
+    {
+      company: "Apple",
+      role: "Product Designer",
+      location: "On-site",
+      type: "Full-time",
+      experience: "4-6 years",
+      skills: ["Product Design", "Sketch", "Prototyping"],
+      logo: "https://logos-world.net/wp-content/uploads/2020/04/Apple-Logo.png",
+      category: "design"
+    },
+    {
+      company: "Meta",
+      role: "Full Stack Developer",
+      location: "Hybrid",
+      type: "Full-time",
+      experience: "3-5 years",
+      skills: ["React", "Node.js", "MongoDB"],
+      logo: "https://1000logos.net/wp-content/uploads/2021/10/Meta-Logo.png",
+      category: "engineering"
     }
   ];
 
@@ -37,7 +67,7 @@ const Tech = () => {
       price: "$999",
       rating: 4.8,
       students: 1200,
-      image: "/Images/bootcamps/webdev.jpg"
+      image: "https://www.scmgalaxy.com/tutorials/wp-content/uploads/2021/09/Full-stack-developer-1.png"
     },
     {
       name: "UI/UX Design Bootcamp",
@@ -46,7 +76,25 @@ const Tech = () => {
       price: "$799",
       rating: 4.7,
       students: 800,
-      image: "/Images/bootcamps/uiux.jpg"
+      image: "https://hustlersdigest.com/wp-content/uploads/2023/07/ui-ux.webp"
+    },
+    {
+      name: "Data Science & Analytics",
+      duration: "16 weeks",
+      mode: "Online",
+      price: "$1299",
+      rating: 4.9,
+      students: 950,
+      image: "https://www.simplilearn.com/ice9/free_resources_article_thumb/Data-Science-vs.-Big-Data-vs.jpg"
+    },
+    {
+      name: "Cybersecurity Fundamentals",
+      duration: "10 weeks",
+      mode: "Hybrid",
+      price: "$1099",
+      rating: 4.6,
+      students: 600,
+      image: "https://bismarckstate.edu/uploads/248/Cybersecurity%20fundamentals%20copy.jpg"
     }
   ];
 
@@ -55,13 +103,29 @@ const Tech = () => {
       title: "Women Who Code",
       description: "Global community empowering women in tech",
       link: "https://www.womenwhocode.com/",
-      icon: "fas fa-code"
+      icon: "fas fa-code",
+      image: "https://admin.womenwhocode.dev/wp-content/uploads/2024/04/Header-Equal-Pay-Day-1-1-1536x864.png"
     },
     {
       title: "Tech Ladies",
       description: "Job board and community for women in tech",
       link: "https://www.hiretechladies.com/",
-      icon: "fas fa-laptop-code"
+      icon: "fas fa-laptop-code",
+      image: "https://cdn.prod.website-files.com/639957584cdf482e6bd1e96e/67a052b7248ec737007d1638_Mask%20group%20(10).png"
+    },
+    {
+      title: "Girls Who Code",
+      description: "Building the world's largest pipeline of future female engineers",
+      link: "https://girlswhocode.com/",
+      icon: "fas fa-users",
+      image: "https://girlswhocode.com/assets/images/craft-prod/images/_2400x1467_crop_center-center_82_line/GROUP-CROP.jpg.webp"
+    },
+    {
+      title: "She Can Code",
+      description: "Supporting women in technology through education and mentorship",
+      link: "https://shecancode.io/",
+      icon: "fas fa-graduation-cap",
+      image: "https://shecancode.io/wp-content/uploads/2025/03/International-Womens-Day-Collage-1024x640.jpg"
     }
   ];
 
@@ -160,10 +224,14 @@ const Tech = () => {
                 rel="noopener noreferrer" 
                 className="resource-card"
               >
-                <i className={resource.icon}></i>
-                <h3>{resource.title}</h3>
-                <p>{resource.description}</p>
-                <span className="resource-link">Learn More <i className="fas fa-arrow-right"></i></span>
+                <div className="resource-image">
+                  <img src={resource.image} alt={resource.title} />
+                </div>
+                <div className="resource-content">
+                  <h3>{resource.title}</h3>
+                  <p>{resource.description}</p>
+                  <span className="resource-link">Learn More <i className="fas fa-arrow-right"></i></span>
+                </div>
               </a>
             ))}
           </div>

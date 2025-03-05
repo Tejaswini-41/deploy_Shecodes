@@ -5,6 +5,7 @@ import connectDB from './config/db.js';
 import authRoutes from './routes/authRoutes.js';
 import mentorRoutes from './routes/mentorRoutes.js';
 import eventRoutes from './routes/eventRoutes.js';
+import blogRoutes from './routes/blogRoutes.js';
 
 dotenv.config(); 
 connectDB();
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use('/auth', authRoutes);  
 app.use('/api/events', eventRoutes);
 app.use('/api/mentors', mentorRoutes);
+app.use('/api/blogs', blogRoutes);
 
 
 // Start server

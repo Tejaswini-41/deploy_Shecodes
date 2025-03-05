@@ -1,47 +1,81 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
 import './Blogs.css';
 
+const API_URL = 'http://localhost:5000/api/blogs';
+
 const Blogs = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [showPostForm, setShowPostForm] = useState(false);
+  const [blogForm, setBlogForm] = useState({
+    title: '',
+    content: '',
+    author: '',
+    category: 'tech',
+    excerpt: '',
+    image: ''
+  });
 
   const categories = [
     'all', 'success-stories', 'tech', 'career', 'leadership', 'wellness'
   ];
 
-  const blogPosts = [
-    {
-      title: "Breaking the Glass Ceiling in Tech",
-      author: "Priya Sharma",
-      date: "March 15, 2024",
-      category: "success-stories",
-      image: "/Images/blogs/tech-ceiling.jpg",
-      readTime: "5 min read",
-      excerpt: "My journey from a coding bootcamp to becoming CTO...",
-      authorImg: "/Images/authors/priya.jpg"
-    },
-    {
-      title: "Work-Life Balance in Remote Work",
-      author: "Sarah Wilson",
-      date: "March 14, 2024",
-      category: "wellness",
-      image: "/Images/blogs/remote-work.jpg",
-      readTime: "4 min read",
-      excerpt: "Tips for maintaining balance while working from home...",
-      authorImg: "/Images/authors/sarah.jpg"
-    }
-    // Add more blog posts...
-  ];
+  // Fetch blogs when component mounts or category changes
+  useEffect(() => {
+    fetchBlogs();
+  }, [selectedCategory]);
 
-  const featuredStory = {
-    title: "From Local Business to Global Success",
-    author: "Maya Patel",
-    image: "/Images/blogs/featured-story.jpg",
-    category: "success-stories",
-    excerpt: "How I scaled my startup to serve women entrepreneurs worldwide...",
-    readTime: "8 min read",
-    authorImg: "/Images/authors/maya.jpg"
+  const fetchBlogs = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      console.log('Fetching blogs for category:', selectedCategory);
+      
+      const response = await axios.get(`${API_URL}?category=${selectedCategory}`);
+      console.log('Blogs fetched successfully:', response.data);
+      setBlogs(response.data);
+    } catch (err) {
+      console.error('Error details:', err);
+      setError(err.response?.data?.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setBlogForm(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      const response = await axios.post(API_URL, blogForm);
+      setBlogs(prev => [response.data, ...prev]);
+      setShowPostForm(false);
+      setBlogForm({
+        title: '',
+        content: '',
+        author: '',
+        category: 'tech',
+        excerpt: '',
+        image: ''
+      });
+    } catch (err) {
+      setError('Failed to post blog');
+      console.error('Error posting blog:', err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -52,23 +86,6 @@ const Blogs = () => {
           <h1>Stories That Inspire</h1>
           <p>Discover success stories, insights, and knowledge from women leaders</p>
         </div>
-
-        <section className="featured-story">
-          <div className="featured-content">
-            <img src={featuredStory.image} alt={featuredStory.title} />
-            <div className="featured-text">
-              <span className="category-tag">{featuredStory.category}</span>
-              <h2>{featuredStory.title}</h2>
-              <p>{featuredStory.excerpt}</p>
-              <div className="author-info">
-                <img src={featuredStory.authorImg} alt={featuredStory.author} />
-                <span>{featuredStory.author}</span>
-                <span className="read-time">{featuredStory.readTime}</span>
-              </div>
-              <button className="read-more-btn">Read Full Story</button>
-            </div>
-          </div>
-        </section>
 
         <section className="blog-filters">
           <div className="category-tabs">
@@ -84,39 +101,127 @@ const Blogs = () => {
           </div>
         </section>
 
-        <section className="blog-grid">
-          {blogPosts
-            .filter(post => selectedCategory === 'all' || post.category === selectedCategory)
-            .map((post, index) => (
-              <article key={index} className="blog-card">
-                <div className="blog-image">
-                  <img src={post.image} alt={post.title} />
-                  <span className="category-tag">{post.category}</span>
-                </div>
-                <div className="blog-content">
-                  <h3>{post.title}</h3>
-                  <p>{post.excerpt}</p>
-                  <div className="blog-meta">
-                    <div className="author-info">
-                      <img src={post.authorImg} alt={post.author} />
-                      <span>{post.author}</span>
-                    </div>
-                    <div className="post-info">
-                      <span>{post.date}</span>
-                      <span>{post.readTime}</span>
-                    </div>
-                  </div>
-                </div>
-              </article>
-            ))}
-        </section>
-
         <section className="write-blog">
           <div className="write-blog-content">
             <h2>Share Your Story</h2>
             <p>Inspire others by sharing your experiences and insights</p>
-            <button className="write-blog-btn">Start Writing</button>
+            <button 
+              className="write-blog-btn"
+              onClick={() => setShowPostForm(true)}
+            >
+              Start Writing
+            </button>
           </div>
+        </section>
+
+        {showPostForm && (
+          <div className="modal-overlay">
+            <div className="modal-content">
+              <h2>Write Your Blog</h2>
+              <form onSubmit={handleSubmit} className="blog-form">
+                <div className="form-group">
+                  <label>Title</label>
+                  <input
+                    type="text"
+                    name="title"
+                    value={blogForm.title}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Category</label>
+                  <select
+                    name="category"
+                    value={blogForm.category}
+                    onChange={handleInputChange}
+                    required
+                  >
+                    {categories.filter(cat => cat !== 'all').map(category => (
+                      <option key={category} value={category}>
+                        {category.split('-').join(' ')}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="form-group">
+                  <label>Content</label>
+                  <textarea
+                    name="content"
+                    value={blogForm.content}
+                    onChange={handleInputChange}
+                    rows="10"
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Excerpt (Short summary)</label>
+                  <textarea
+                    name="excerpt"
+                    value={blogForm.excerpt}
+                    onChange={handleInputChange}
+                    rows="3"
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Author Name</label>
+                  <input
+                    type="text"
+                    name="author"
+                    value={blogForm.author}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Image URL</label>
+                  <input
+                    type="text"
+                    name="image"
+                    value={blogForm.image}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div className="form-actions">
+                  <button type="button" onClick={() => setShowPostForm(false)}>
+                    Cancel
+                  </button>
+                  <button type="submit" disabled={loading}>
+                    {loading ? 'Posting...' : 'Post Blog'}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
+
+        {loading && <div className="loading">Loading blogs...</div>}
+        {error && <div className="error-message">{error}</div>}
+
+        <section className="blog-grid">
+          {blogs.map((blog, index) => (
+            <article key={index} className="blog-card">
+              <div className="blog-image">
+                <img src={blog.image || '/Images/blogs/default.jpg'} alt={blog.title} />
+                <span className="category-tag">{blog.category}</span>
+              </div>
+              <div className="blog-content">
+                <h3>{blog.title}</h3>
+                <p>{blog.excerpt}</p>
+                <div className="blog-meta">
+                  <div className="author-info">
+                    <img src={blog.authorImg || '/Images/authors/default.jpg'} alt={blog.author} />
+                    <span>{blog.author}</span>
+                  </div>
+                  <div className="post-info">
+                    <span>{new Date(blog.createdAt).toLocaleDateString()}</span>
+                    <span>{blog.readTime}</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))}
         </section>
       </div>
       <Footer />

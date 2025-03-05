@@ -3,14 +3,14 @@ import './ProfileModal.css';
 
 const ProfileModal = ({ isOpen, onClose }) => {
   const defaultUser = {
-    name: 'Jane Doe',
-    email: 'jane.doe@example.com',
+    name: 'Tejaswini Durge',
+    email: 'tejaswinidurge41@gmail.com',
     avatar: '/Images/P1.png',
     role: 'Active Member',
     joinDate: new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' }),
     interests: ['Technology', 'Leadership', 'Community'],
     location: 'New York, USA',
-    phone: '+1 234 567 8900',
+    phone: '845-123-4567',
     occupation: 'Software Developer',
     skills: ['React', 'JavaScript', 'UI/UX Design']
   };

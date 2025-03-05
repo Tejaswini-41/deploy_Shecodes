@@ -280,6 +280,12 @@ const Community = () => {
     setShowDiscussionForm(false);
   };
 
+  // Update or add the handleJoinEvent function
+  const handleJoinEvent = (event) => {
+    // Redirect to the IndianTimes event page
+    window.open('https://www.indiatimes.com/events/international-womens-day-2025-celebration-10-best-events-and-venues-in-mumbai-for-womens-day-654027.html', '_blank');
+  };
+
   console.log('Current mentors state:', mentors);
   console.log('Current activeTab:', activeTab);
 
@@ -609,7 +615,12 @@ const Community = () => {
                     <p><i className="far fa-clock"></i> {event.time}</p>
                     <p><i className="fas fa-map-marker-alt"></i> {event.location}</p>
                     <p><i className="fas fa-users"></i> {event.attendees} attending</p>
-                    <button className="join-event-btn">Join Event</button>
+                    <button 
+                      className="join-event-btn"
+                      onClick={() => handleJoinEvent(event)}
+                    >
+                      Join Event
+                    </button>
                   </div>
                 </div>
               ))}

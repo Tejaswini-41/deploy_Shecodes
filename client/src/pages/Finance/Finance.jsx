@@ -35,13 +35,19 @@ const successStories = [
     name: "Priya Sharma",
     title: "From Savings to Investment",
     story: "Started with ₹1000 monthly SIP, now manages a diverse portfolio",
-    image: "/Images/finance/success1.jpg"
+    image: "http://www.daviscos.com/wp-content/uploads/2017/08/accounting-and-finance-woman-e1504025803384.jpg"
+  },
+  {
+    name: "Kimberly Dixit",
+    title: "Digital Banking Success",
+    story: "Transformed her small business through digital payments",
+    image: "https://www.womanthology.co.uk/wp-content/uploads/2015/11/Women-in-finance.jpg"
   },
   {
     name: "Meera Patel",
-    title: "Digital Banking Success",
-    story: "Transformed her small business through digital payments",
-    image: "/Images/finance/success2.jpg"
+    title: "Stock Market Maven",
+    story: "Built a strong retirement fund through strategic stock investments",
+    image: "https://mh-llp.com/wp-content/uploads/2022/05/Meera-1050x722.jpg"
   }
 ];
 

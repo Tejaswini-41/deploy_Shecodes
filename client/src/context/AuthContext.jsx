@@ -1,6 +1,10 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 
 export const AuthContext = createContext();
+
+export const useAuth = () => {
+  return useContext(AuthContext);
+};
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -31,7 +35,6 @@ export const AuthProvider = ({ children }) => {
         throw new Error(data.message || 'Login failed');
       }
 
-      // Save user to local storage
       localStorage.setItem('user', JSON.stringify(data));
       setUser(data);
       return data;
@@ -56,7 +59,6 @@ export const AuthProvider = ({ children }) => {
         throw new Error(data.message || 'Registration failed');
       }
 
-      // Save user to local storage
       localStorage.setItem('user', JSON.stringify(data));
       setUser(data);
       return data;
@@ -70,17 +72,17 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
+  const value = {
+    user,
+    loading,
+    login,
+    register,
+    logout,
+    isAuthenticated: !!user
+  };
+
   return (
-    <AuthContext.Provider
-      value={{
-        user,
-        loading,
-        login,
-        register,
-        logout,
-        isAuthenticated: !!user,
-      }}
-    >
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   );

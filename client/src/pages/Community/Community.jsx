@@ -4,7 +4,8 @@ import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
 import './Community.css';
 
-const API_URL = 'http://localhost:5000/api/mentors';
+const EVENT_API_URL = 'http://localhost:5000/api/events';
+const MENTOR_API_URL = 'http://localhost:5000/api/mentors';
 
 const Community = () => {
   const [activeTab, setActiveTab] = useState('discussions');
@@ -58,6 +59,7 @@ const Community = () => {
   // Fetch mentors from API when component mounts or tab changes to mentorship
   useEffect(() => {
     if (activeTab === 'mentorship') {
+      console.log('Fetching mentors for mentorship tab...');
       fetchMentors();
     }
   }, [activeTab]);
@@ -67,15 +69,33 @@ const Community = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get(API_URL);
+      console.log('Fetching mentors from API...');
+      const response = await axios.get(MENTOR_API_URL);
+      console.log('✅ Fetched mentors successfully:', response.data);
       setMentors(response.data);
     } catch (err) {
-      console.error('Error fetching mentors:', err);
+      console.error('❌ Error fetching mentors:', err);
       setError('Failed to load mentors. Please try again later.');
     } finally {
       setLoading(false);
     }
   };
+    // Function to fetch events
+    const fetchEvents = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        console.log('Fetching events from API...');
+        const response = await axios.get(EVENT_API_URL);
+        console.log('✅ Fetched events successfully:', response.data);
+        setEvents(response.data);
+      } catch (err) {
+        console.error('❌ Error fetching events:', err);
+        setError('Failed to load events. Please try again later.');
+      } finally {
+        setLoading(false);
+      }
+    };
 
   // Handle mentor form input changes
   const handleMentorInputChange = (e) => {
@@ -208,6 +228,9 @@ const Community = () => {
     setShowDiscussionForm(false);
   };
 
+  console.log('Current mentors state:', mentors);
+  console.log('Current activeTab:', activeTab);
+
   return (
     <div className="community-container">
       <Navbar />
@@ -334,11 +357,45 @@ const Community = () => {
               <button 
                 className="become-mentor-btn" 
                 onClick={() => setShowMentorForm(true)}
+                style={{ display: 'block' }} // Force button to be visible
               >
                 Become a Mentor
               </button>
             </div>
             
+            {loading && <div>Loading mentors...</div>}
+            {error && <div className="error-message">{error}</div>}
+            
+            <div className="mentors-grid">
+              {mentors && mentors.length > 0 ? (
+                mentors.map((mentor, index) => (
+                  <div key={index} className="mentor-card">
+                    <div className="mentor-header">
+                      <img src={mentor.avatar || '/Images/mentors/default.jpg'} alt={mentor.name} />
+                      <div className="mentor-status">{mentor.availability}</div>
+                    </div>
+                    <div className="mentor-info">
+                      <h3>{mentor.name}</h3>
+                      <p className="mentor-role">{mentor.role} at {mentor.company}</p>
+                      <div className="mentor-expertise">
+                        {Array.isArray(mentor.expertise) ? 
+                          mentor.expertise.map((skill, i) => (
+                            <span key={i} className="expertise-tag">{skill}</span>
+                          )) : 
+                          <span className="expertise-tag">{mentor.expertise}</span>
+                        }
+                      </div>
+                      <button className="connect-btn">Connect</button>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="no-mentors">
+                  {loading ? 'Loading mentors...' : 'No mentors available yet. Be the first!'}
+                </div>
+              )}
+            </div>
+
             {showMentorForm && (
               <div className="modal-overlay">
                 <div className="modal-content">
@@ -406,31 +463,6 @@ const Community = () => {
                 </div>
               </div>
             )}
-            
-            <div className="mentors-grid">
-              {mentors.length === 0 && !loading ? (
-                <div className="no-mentors">No mentors available yet. Be the first!</div>
-              ) : (
-                mentors.map((mentor, index) => (
-                  <div key={index} className="mentor-card">
-                    <div className="mentor-header">
-                      <img src={mentor.avatar} alt={mentor.name} />
-                      <div className="mentor-status">{mentor.availability}</div>
-                    </div>
-                    <div className="mentor-info">
-                      <h3>{mentor.name}</h3>
-                      <p className="mentor-role">{mentor.role} at {mentor.company}</p>
-                      <div className="mentor-expertise">
-                        {mentor.expertise.map((skill, i) => (
-                          <span key={i} className="expertise-tag">{skill}</span>
-                        ))}
-                      </div>
-                      <button className="connect-btn">Connect</button>
-                    </div>
-                  </div>
-                ))
-              )}
-            </div>
           </section>
         )}
 

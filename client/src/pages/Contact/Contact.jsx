@@ -23,16 +23,16 @@ const Contact = () => {
 
   const officeLocations = [
     {
-      city: "Mumbai",
+      city: "Pune",
       address: "123 Business Hub, Andheri East",
       phone: "+91 22 1234 5678",
-      email: "mumbai@empowerher.com"
+      email: "empowerher_pune@gmail.com"
     },
     {
       city: "Delhi",
       address: "456 Tech Park, Gurugram",
       phone: "+91 11 8765 4321",
-      email: "delhi@empowerher.com"
+      email: "empowerher_delhi@gmail.com"
     }
   ];
 
@@ -145,7 +145,7 @@ const Contact = () => {
                 <div className="contact-card">
                   <i className="fas fa-phone-alt"></i>
                   <h4>Emergency Helpline</h4>
-                  <p>1800-XXX-XXXX</p>
+                  <p>91874789003</p>
                   <span>Available 24/7</span>
                 </div>
 

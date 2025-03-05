@@ -3,8 +3,10 @@ import { useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   
@@ -17,18 +19,36 @@ const Login = () => {
     setError('');
     
     try {
+      const { email, password } = formData;
       await login(email, password);
-      navigate('/dashboard'); // Redirect to dashboard on successful login
+
+      // If login successful, get stored user data
+      const storedData = localStorage.getItem('userData');
+      if (storedData) {
+        const userData = JSON.parse(storedData);
+        console.log('Logged in user:', userData); // For debugging
+      }
+
+      navigate('/dashboard');
     } catch (err) {
       setError(err.message || 'Failed to login');
+      console.error('Login error:', err);
     } finally {
       setLoading(false);
     }
   };
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
   return (
     <div className="login-container">
-      <h2>Login</h2>
+      <h2>Welcome Back</h2>
       {error && <div className="error-message">{error}</div>}
       <form onSubmit={handleSubmit}>
         <div className="form-group">
@@ -36,8 +56,9 @@ const Login = () => {
           <input
             type="email"
             id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
             required
           />
         </div>
@@ -46,13 +67,14 @@ const Login = () => {
           <input
             type="password"
             id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
             required
           />
         </div>
         <button type="submit" disabled={loading}>
-          {loading ? 'Loading...' : 'Login'}
+          {loading ? 'Logging in...' : 'Login'}
         </button>
       </form>
       <p>

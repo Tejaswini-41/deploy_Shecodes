@@ -188,7 +188,7 @@ const Entrepreneurship = () => {
           </button>
         </div>
 
-        {activeTab === 'resources' && (
+        {/* {activeTab === 'resources' && (
           <section className="resources-section">
             <h2>Business Resources</h2>
             <div className="resources-grid">
@@ -208,7 +208,7 @@ const Entrepreneurship = () => {
               ))}
             </div>
           </section>
-        )}
+        )} */}
 
         {activeTab === 'mentorship' && (
           <section className="mentorship-section">

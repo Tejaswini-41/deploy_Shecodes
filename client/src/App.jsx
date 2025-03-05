@@ -13,6 +13,8 @@ import Health from './pages/Health/Health';
 import Safety from './pages/Safety/Safety';
 import Leadership from './pages/Leadership/Leadership';
 import Contact from './pages/Contact/Contact';
+import Finance from './pages/Finance/Finance';
+
 
 function App() {
   return (
@@ -30,6 +32,7 @@ function App() {
           <Route path="/dashboard/health" element={<Health />} />
           <Route path="/dashboard/safety" element={<Safety />} />
           <Route path="/dashboard/leadership" element={<Leadership />} />
+          <Route path="/dashboard/finance" element={<Finance />} />
           <Route path="/dashboard/contact" element={<Contact />} />
           <Route path="/" element={<Navigate to="/login" replace />} />
         </Routes>

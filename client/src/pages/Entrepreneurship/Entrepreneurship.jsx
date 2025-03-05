@@ -59,6 +59,61 @@ const Entrepreneurship = () => {
     }
   ];
 
+  const businessLeaders = [
+    {
+      name: "Nirmala Sitharaman",
+      role: "Finance Minister of India",
+      company: "Government of India",
+      image: "/Images/business/nirmala-sitharaman.jpg",
+      description: "First full-time female Finance Minister of India. Known for her strategic economic policies and reforms.",
+      achievements: [
+        "Union Finance Minister since 2019",
+        "Listed in Forbes' 100 most powerful women",
+        "Key role in economic reforms",
+        "Former Defence Minister of India"
+      ]
+    },
+    {
+      name: "Nita Ambani",
+      role: "Founder & Chairperson",
+      company: "Reliance Foundation",
+      image: "/Images/business/nita-ambani.jpg",
+      description: "A business leader, sports administrator, and philanthropist who has transformed education and sports in India.",
+      achievements: [
+        "First Indian woman to become IOC member",
+        "Revolutionized Indian sports ecosystem",
+        "Leading force behind Reliance Foundation",
+        "Pioneer in educational initiatives"
+      ]
+    },
+    {
+      name: "Namita Thapar",
+      role: "Executive Director",
+      company: "Emcure Pharmaceuticals",
+      image: "/Images/business/namita-thapar.jpg",
+      description: "Leading voice in Indian pharmaceutical industry and champion of women entrepreneurship.",
+      achievements: [
+        "Shark Tank India Judge",
+        "CEO of Emcure Pharmaceuticals",
+        "Young Global Leader - World Economic Forum",
+        "Advocates for women's health"
+      ]
+    },
+    {
+      name: "Vineeta Singh",
+      role: "CEO & Co-founder",
+      company: "SUGAR Cosmetics",
+      image: "/Images/business/vineeta-singh.jpg",
+      description: "Built SUGAR into one of India's fastest-growing beauty brands, focusing on millennial women.",
+      achievements: [
+        "Built ₹500+ crore beauty brand",
+        "IIM-A alumnus",
+        "Featured in Forbes Asia 30 Under 30",
+        "Shark Tank India Judge"
+      ]
+    }
+  ];
+
   return (
     <div className="entrepreneurship-container">
       <Navbar />
@@ -87,17 +142,23 @@ const Entrepreneurship = () => {
         </div>
 
         <div className="content-tabs">
-          <button 
+          {/* <button 
             className={`tab-btn ${activeTab === 'resources' ? 'active' : ''}`}
             onClick={() => setActiveTab('resources')}
           >
             Resources
-          </button>
-          <button 
+          </button> */}
+          {/* <button 
             className={`tab-btn ${activeTab === 'mentorship' ? 'active' : ''}`}
             onClick={() => setActiveTab('mentorship')}
           >
             Mentorship
+          </button> */}
+                    <button 
+            className={`tab-btn ${activeTab === 'leaders' ? 'active' : ''}`}
+            onClick={() => setActiveTab('leaders')}
+          >
+            Business Leaders
           </button>
           <button 
             className={`tab-btn ${activeTab === 'funding' ? 'active' : ''}`}
@@ -105,6 +166,7 @@ const Entrepreneurship = () => {
           >
             Funding
           </button>
+
         </div>
 
         {activeTab === 'resources' && (
@@ -176,6 +238,35 @@ const Entrepreneurship = () => {
                     </div>
                     <p className="deadline">Deadline: {opportunity.deadline}</p>
                     <button className="apply-btn">Apply Now</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {activeTab === 'leaders' && (
+          <section className="leaders-section">
+            <h2>Women Business Leaders</h2>
+            <div className="leaders-grid">
+              {businessLeaders.map((leader, index) => (
+                <div key={index} className="leader-card">
+                  <div className="leader-image">
+                    <img src={leader.image} alt={leader.name} />
+                  </div>
+                  <div className="leader-info">
+                    <h2>{leader.name}</h2>
+                    <h3>{leader.role}</h3>
+                    <h4>{leader.company}</h4>
+                    <p>{leader.description}</p>
+                    <div className="achievements">
+                      <h4>Key Achievements:</h4>
+                      <ul>
+                        {leader.achievements.map((achievement, i) => (
+                          <li key={i}>{achievement}</li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 </div>
               ))}

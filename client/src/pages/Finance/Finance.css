@@ -1,0 +1,202 @@
+.finance-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.finance-page {
+  flex: 1;
+  padding: 2rem;
+}
+
+.finance-hero {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 3rem 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 8px;
+}
+
+.finance-hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.finance-navigation {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.nav-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  background: #f0f0f0;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-btn.active {
+  background: #667eea;
+  color: white;
+}
+
+.basics-grid,
+.investment-grid,
+.banking-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.basic-card,
+.investment-card,
+.banking-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.basic-card:hover,
+.investment-card:hover,
+.banking-card:hover {
+  transform: translateY(-5px);
+}
+
+.basic-icon,
+.investment-icon,
+.banking-icon {
+  font-size: 2rem;
+  color: #667eea;
+  margin-bottom: 1rem;
+}
+
+.investment-tips,
+.banking-options {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+.investment-tips li,
+.banking-options li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.investment-tips li:last-child,
+.banking-options li:last-child {
+  border-bottom: none;
+}
+
+.calculator-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  margin-top: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.calculate-btn {
+  margin: 2rem auto;
+  display: block;
+  padding: 1rem 2rem;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.calculate-btn:hover {
+  background: #5a6fd6;
+}
+
+.budget-results {
+  margin-top: 2rem;
+  padding: 2rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.result-category {
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 4px;
+}
+
+.result-category h5 {
+  margin: 0 0 1rem;
+  color: #333;
+}
+
+.positive {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.negative {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+/* Success Stories Styles */
+.success-stories {
+  margin: 3rem 0;
+}
+
+.stories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.story-card {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.story-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.story-content {
+  padding: 1.5rem;
+}
+
+/* Video Section Styles */
+.investment-videos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+
+  .finance-hero {
+    padding: 2rem 1rem;
+  }
+
+  .finance-hero h1 {
+    font-size: 2rem;
+  }
+}

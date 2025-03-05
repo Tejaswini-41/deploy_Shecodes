@@ -1,62 +1,90 @@
 import React from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
+import { workshops } from '../../data/workshops';
 import './Education.css';
 
 const Education = () => {
   const courses = [
     {
-      title: "Web Development Fundamentals",
+      title: "Web Development",
       category: "Technology",
       level: "Beginner",
       duration: "8 weeks",
-      image: "/Images/courses/web-dev.jpg",
+      image: "https://i.ytimg.com/vi/tfciNyRnjx8/maxresdefault.jpg",
       rating: 4.8,
-      enrolled: 1200
+      enrolled: 1200,
+      url: "https://www.youtube.com/watch?v=tfciNyRnjx8"
     },
     {
       title: "Digital Marketing Mastery",
       category: "Marketing",
       level: "Intermediate",
       duration: "6 weeks",
-      image: "/Images/courses/digital-marketing.jpg",
+      image: "https://shehandlesit.com/wp-content/uploads/2022/08/What-Role-Women-Play-in-Digital-Marketing-1089x730.jpg",
       rating: 4.7,
-      enrolled: 850
+      enrolled: 850,
+      url: "https://shehandlesit.com/blog/what-role-do-women-play-in-digital-marketing/"
     },
     {
       title: "Financial Literacy for Women",
       category: "Finance",
       level: "Beginner",
       duration: "4 weeks",
-      image: "/Images/courses/finance.jpg",
+      image: "https://i.ytimg.com/vi/bo2XTi68jLQ/maxresdefault.jpg",
       rating: 4.9,
-      enrolled: 2100
+      enrolled: 2100,
+      url: "https://www.youtube.com/watch?v=bo2XTi68jLQ"
     },
     {
-      title: "Leadership & Communication",
+      title: "Leadership Communication",
       category: "Soft Skills",
       level: "All Levels",
       duration: "5 weeks",
-      image: "/Images/courses/leadership.jpg",
+      image: "https://i.ytimg.com/vi/-iaRROTB-Rw/maxresdefault.jpg",
       rating: 4.6,
-      enrolled: 1500
-    }
-  ];
-
-  const workshops = [
-    {
-      title: "Personal Branding Workshop",
-      date: "March 15, 2024",
-      time: "10:00 AM - 1:00 PM",
-      instructor: "Sarah Johnson",
-      spots: 30
+      enrolled: 1500,
+      url: "https://www.youtube.com/watch?v=-iaRROTB-Rw"
     },
     {
-      title: "Tech Interview Preparation",
-      date: "March 20, 2024",
-      time: "2:00 PM - 5:00 PM",
-      instructor: "Emily Chen",
-      spots: 25
+      title: "Python Programming",
+      category: "Technology",
+      level: "Beginner",
+      duration: "10 weeks",
+      image: "https://i.ytimg.com/vi/7p_rO_1WVH8/maxresdefault.jpg",
+      rating: 4.8,
+      enrolled: 3000,
+      url: "https://www.youtube.com/watch?v=KrBnRcpWGEI"
+    },
+    {
+      title: "Data Science Essentials",
+      category: "Technology",
+      level: "Intermediate",
+      duration: "12 weeks",
+      image: "https://i.ytimg.com/vi/ywoxdIw2-Ok/hqdefault.jpg",
+      rating: 4.7,
+      enrolled: 1800,
+      url: "https://www.youtube.com/watch?v=ywoxdIw2-Ok"
+    },
+    {
+      title: "Entrepreneurship 101",
+      category: "Business",
+      level: "Beginner",
+      duration: "6 weeks",
+      image: "http://www.ourbusinessladder.com/wp-content/uploads/2019/03/female-entrepreneurship-opportunities-and-challenges.jpg",
+      rating: 4.9,
+      enrolled: 2500,
+      url: "https://www.youtube.com/watch?v=niOV_jSVCKs"
+    },
+    {
+      title: "UX/UI Design Fundamentals",
+      category: "Technology",
+      level: "Beginner",
+      duration: "8 weeks",
+      image: "https://i.ytimg.com/vi/puJAFI7yaho/maxresdefault.jpg",
+      rating: 4.8,
+      enrolled: 1600,
+      url: "https://www.youtube.com/watch?v=SRec90j6lTY"
     }
   ];
 
@@ -97,7 +125,9 @@ const Education = () => {
                     <span><i className="fas fa-star"></i> {course.rating}</span>
                     <span><i className="fas fa-users"></i> {course.enrolled}</span>
                   </div>
-                  <button className="enroll-btn">Enroll Now</button>
+                  <button className="enroll-btn" onClick={() => window.open(course.url, '_blank')}>
+                    Enroll Now
+                  </button>
                 </div>
               </div>
             ))}
@@ -109,15 +139,26 @@ const Education = () => {
           <div className="workshops-grid">
             {workshops.map((workshop, index) => (
               <div key={index} className="workshop-card">
+                <div className="workshop-image">
+                  <img src={workshop.image} alt={workshop.title} />
+                  <span className="workshop-price">{workshop.price}</span>
+                </div>
                 <div className="workshop-content">
                   <h3>{workshop.title}</h3>
+                  <p className="workshop-description">{workshop.description}</p>
                   <div className="workshop-info">
                     <p><i className="far fa-calendar"></i> {workshop.date}</p>
                     <p><i className="far fa-clock"></i> {workshop.time}</p>
+                    <p><i className="fas fa-map-marker-alt"></i> {workshop.location}</p>
                     <p><i className="fas fa-chalkboard-teacher"></i> {workshop.instructor}</p>
                     <p><i className="fas fa-user-friends"></i> {workshop.spots} spots available</p>
                   </div>
-                  <button className="register-btn">Register Now</button>
+                  <button 
+                    className="register-btn" 
+                    onClick={() => window.open(workshop.url, '_blank')}
+                  >
+                    Register Now
+                  </button>
                 </div>
               </div>
             ))}

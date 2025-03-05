@@ -23,7 +23,7 @@ const mentorSchema = new mongoose.Schema({
   },
   avatar: {
     type: String,
-    default: '/Images/mentors/default.jpg'
+    default: 'https://www.sincera.in/wp-content/uploads/2017/05/what-is-mentoring.jpg'
   }
 }, {
   timestamps: true

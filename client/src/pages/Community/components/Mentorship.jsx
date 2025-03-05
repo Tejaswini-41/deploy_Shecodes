@@ -14,7 +14,7 @@ const Mentorship = () => {
     company: '',
     expertise: '',
     availability: '',
-    avatar: '/Images/mentors/default.jpg',
+    avatar: 'https://www.sincera.in/wp-content/uploads/2017/05/what-is-mentoring.jpg',
     imageFile: null
   });
 
@@ -106,7 +106,7 @@ const Mentorship = () => {
         company: '',
         expertise: '',
         availability: '',
-        avatar: '/Images/mentors/default.jpg',
+        avatar: 'https://www.sincera.in/wp-content/uploads/2017/05/what-is-mentoring.jpg',
         imageFile: null
       });
     } catch (err) {
@@ -141,7 +141,7 @@ const Mentorship = () => {
         {mentors.map((mentor, index) => (
           <div key={index} className="mentor-card">
             <div className="mentor-header">
-              <img src={mentor.avatar || '/Images/mentors/default.jpg'} alt={mentor.name} />
+              <img src={mentor.avatar || 'https://www.sincera.in/wp-content/uploads/2017/05/what-is-mentoring.jpg'} alt={mentor.name} />
               <div className="mentor-status">{mentor.availability}</div>
             </div>
             <div className="mentor-info">
@@ -155,7 +155,13 @@ const Mentorship = () => {
                   <span className="expertise-tag">{mentor.expertise}</span>
                 }
               </div>
-              <button className="connect-btn">Connect</button>
+              <button 
+                className="connect-btn" 
+                onClick={() => window.location.href = mentor.linkedinUrl || 'https://www.linkedin.com/'}
+              >
+                Connect
+              </button>
+
             </div>
           </div>
         ))}

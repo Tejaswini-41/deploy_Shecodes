@@ -3,6 +3,13 @@ import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
 import './Health.css';
 
+// First, add this utility function at the top of your component
+const getYouTubeVideoId = (url) => {
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+  const match = url.match(regExp);
+  return match && match[2].length === 11 ? match[2] : null;
+};
+
 const Health = () => {
   const [activeSection, setActiveSection] = useState('menstrual');
 
@@ -92,21 +99,32 @@ const Health = () => {
     }
   ];
 
+  // Update the expertAdvice array with more YouTube videos
   const expertAdvice = [
     {
       expert: "Dr. Sarah Johnson",
       title: "OB/GYN Specialist",
       topic: "Understanding Your Cycle",
-      videoUrl: "/videos/cycle-understanding.mp4",
-      thumbnail: "/Images/health/video-thumb1.jpg"
+      videoUrl: "https://youtu.be/Vl2wRbO8LZU?si=YlyVAu1F0psUoDJn"
     },
     {
       expert: "Dr. Maya Patel",
       title: "Women's Health Expert",
       topic: "Maintaining Intimate Hygiene",
-      videoUrl: "/videos/hygiene-tips.mp4",
-      thumbnail: "/Images/health/video-thumb2.jpg"
-    }
+      videoUrl: "https://youtube.com/watch?v=7xYf5DOUxcg"
+    },
+    {
+      expert: "Dr. Sarah Johnson",
+      title: "OB/GYN Specialist",
+      topic: "Understanding Your Cycle",
+      videoUrl: "https://youtu.be/zcvo9VLVHWc?si=4EDv6_V-pz-uMBBg"
+    },
+    {
+      expert: "Dr. Sarah Johnson",
+      title: "OB/GYN Specialist",
+      topic: "Understanding Your Cycle",
+      videoUrl: "https://youtu.be/tkFgcziw2ZQ?si=YpAdPebxoOys4Gmy"
+    },
   ];
 
   return (
@@ -193,11 +211,16 @@ const Health = () => {
             <div className="video-grid">
               {expertAdvice.map((video, index) => (
                 <div key={index} className="video-card">
-                  <div className="video-thumbnail">
-                    <img src={video.thumbnail} alt={video.topic} />
-                    <div className="play-button">
-                      <i className="fas fa-play"></i>
-                    </div>
+                  <div className="video-player">
+                    <iframe
+                      width="100%"
+                      height="215"
+                      src={`https://www.youtube.com/embed/${getYouTubeVideoId(video.videoUrl)}`}
+                      title={video.topic}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
                   </div>
                   <div className="video-info">
                     <h3>{video.topic}</h3>

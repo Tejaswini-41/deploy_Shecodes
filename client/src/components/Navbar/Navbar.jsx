@@ -14,7 +14,8 @@ const Navbar = () => {
     { to: "/dashboard/education", label: "Learn" },
     { to: "/dashboard/community", label: "Community" },
     { to: "/dashboard/tech", label: "Tech" },
-    { to: "/dashboard/blogs", label: "Blogs" }
+    { to: "/dashboard/blogs", label: "Blogs" },
+    { to: "/dashboard/finance", label: "Finance" }  // Added Finance link
   ];
 
   const moreLinks = [

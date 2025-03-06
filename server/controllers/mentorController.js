@@ -1,5 +1,21 @@
 import Mentor from '../models/Mentor.js';
 
+// Array of professional mentor/avatar images that are free to use
+const mentorAvatars = [
+  'https://randomuser.me/api/portraits/women/1.jpg',
+  'https://randomuser.me/api/portraits/women/2.jpg',
+  'https://randomuser.me/api/portraits/women/3.jpg',
+  'https://randomuser.me/api/portraits/women/4.jpg',
+  'https://randomuser.me/api/portraits/women/5.jpg',
+  'https://randomuser.me/api/portraits/women/6.jpg',
+  'https://randomuser.me/api/portraits/women/7.jpg',
+  'https://randomuser.me/api/portraits/women/8.jpg',
+  'https://randomuser.me/api/portraits/women/9.jpg',
+  'https://randomuser.me/api/portraits/women/10.jpg',
+  'https://randomuser.me/api/portraits/women/11.jpg',
+  'https://randomuser.me/api/portraits/women/12.jpg'
+];
+
 // Get all mentors
 export const getMentors = async (req, res) => {
   try {
@@ -14,7 +30,7 @@ export const createMentor = async (req, res) => {
     try {
       console.log('Received mentor data:', req.body);
       
-      const { name, role, company, expertise, availability, avatar } = req.body;
+      const { name, role, company, expertise, availability, avatar, linkedinUrl } = req.body;
       
       // Ensure expertise is an array
       const expertiseArray = Array.isArray(expertise) ? expertise : 
@@ -24,13 +40,17 @@ export const createMentor = async (req, res) => {
       
       console.log('Processed expertise array:', expertiseArray);
       
+      // Get a random avatar if one isn't provided
+      const randomAvatar = mentorAvatars[Math.floor(Math.random() * mentorAvatars.length)];
+      
       const mentor = new Mentor({
         name,
         role,
         company,
         expertise: expertiseArray,
         availability,
-        avatar: avatar || '/Images/mentors/default.jpg'
+        linkedinUrl: linkedinUrl || 'https://www.linkedin.com/in/',
+        avatar: avatar || randomAvatar
       });
   
       console.log('Created mentor object:', mentor);

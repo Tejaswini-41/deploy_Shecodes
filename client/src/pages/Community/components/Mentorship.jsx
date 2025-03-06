@@ -14,7 +14,8 @@ const Mentorship = () => {
     company: '',
     expertise: '',
     availability: '',
-    avatar: 'https://www.sincera.in/wp-content/uploads/2017/05/what-is-mentoring.jpg',
+    linkedinUrl: '',
+    avatar: 'https://cdn.prod.website-files.com/5ce11396d0cadb67eb2cac0e/621e3dddf8077a0ce7a409ba_Professional%20mentor.pngg',
     imageFile: null
   });
 
@@ -86,6 +87,7 @@ const Mentorship = () => {
       formData.append('company', mentorForm.company);
       formData.append('expertise', JSON.stringify(expertiseArray));
       formData.append('availability', mentorForm.availability);
+      formData.append('linkedinUrl', mentorForm.linkedinUrl || 'https://www.linkedin.com/in/');
       
       if (mentorForm.imageFile) {
         formData.append('image', mentorForm.imageFile);
@@ -106,7 +108,8 @@ const Mentorship = () => {
         company: '',
         expertise: '',
         availability: '',
-        avatar: 'https://www.sincera.in/wp-content/uploads/2017/05/what-is-mentoring.jpg',
+        linkedinUrl: '',
+        avatar: 'https://cdn.prod.website-files.com/5ce11396d0cadb67eb2cac0e/621e3dddf8077a0ce7a409ba_Professional%20mentor.pngg',
         imageFile: null
       });
     } catch (err) {
@@ -141,7 +144,7 @@ const Mentorship = () => {
         {mentors.map((mentor, index) => (
           <div key={index} className="mentor-card">
             <div className="mentor-header">
-              <img src={mentor.avatar || 'https://www.sincera.in/wp-content/uploads/2017/05/what-is-mentoring.jpg'} alt={mentor.name} />
+              <img src={mentor.avatar || 'https://cdn.prod.website-files.com/5ce11396d0cadb67eb2cac0e/621e3dddf8077a0ce7a409ba_Professional%20mentor.pngg'} alt={mentor.name} />
               <div className="mentor-status">{mentor.availability}</div>
             </div>
             <div className="mentor-info">
@@ -222,6 +225,16 @@ const Mentorship = () => {
                   onChange={handleMentorInputChange}
                   placeholder="e.g. 2 slots available"
                   required
+                />
+              </div>
+              <div className="form-group">
+                <label>LinkedIn URL</label>
+                <input 
+                  type="text" 
+                  name="linkedinUrl" 
+                  value={mentorForm.linkedinUrl} 
+                  onChange={handleMentorInputChange}
+                  placeholder="e.g. https://www.linkedin.com/in/your-profile"
                 />
               </div>
               <div className="form-group">

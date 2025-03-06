@@ -24,7 +24,7 @@ router.post('/', upload.single('image'), async (req, res) => {
       company: req.body.company,
       expertise: JSON.parse(req.body.expertise),
       availability: req.body.availability,
-      avatar: req.file ? `/uploads/mentors/${req.file.filename}` : '/Images/mentors/default.jpg'
+      avatar: req.file ? `/uploads/mentors/${req.file.filename}` : 'https://cdn.prod.website-files.com/5ce11396d0cadb67eb2cac0e/621e3dddf8077a0ce7a409ba_Professional%20mentor.png'
     };
 
     // Create new mentor using mongoose model

@@ -71,13 +71,47 @@ const Safety = () => {
 
   const selfDefenseVideos = [
     {
-      title: "Basic Self-Defense Moves",
+      title: "Basic Self-Defense Moves Every Woman Should Know",
       instructor: "Sarah Chen",
       duration: "10 mins",
-      thumbnail: "/Images/safety/defense1.jpg",
-      videoUrl: "#"
+      thumbnail: "https://img.youtube.com/vi/KVpxP3ZZtAc/hqdefault.jpg",
+      videoUrl: "https://www.youtube.com/watch?v=KVpxP3ZZtAc"
     },
-    // Add more videos...
+    {
+      title: "5 Self-Defense Moves Every Woman Should Know",
+      instructor: "Roxanne Jones",
+      duration: "8 mins",
+      thumbnail: "https://img.youtube.com/vi/T7aNSRoDCmg/hqdefault.jpg",
+      videoUrl: "https://www.youtube.com/watch?v=T7aNSRoDCmg"
+    },
+    {
+      title: "Self Defense for Women - 10 Techniques",
+      instructor: "Michelle Lee",
+      duration: "12 mins",
+      thumbnail: "https://img.youtube.com/vi/Gx3_x6RH1J4/hqdefault.jpg",
+      videoUrl: "https://www.youtube.com/watch?v=Gx3_x6RH1J4"
+    },
+    {
+      title: "Women's Self-Defense Techniques",
+      instructor: "Priya Sharma",
+      duration: "7 mins",
+      thumbnail: "https://img.youtube.com/vi/9qyD7vjVfLI/hqdefault.jpg",
+      videoUrl: "https://www.youtube.com/watch?v=9qyD7vjVfLI"
+    },
+    {
+      title: "Self-Defense in Confined Spaces",
+      instructor: "Tara Wilson",
+      duration: "15 mins",
+      thumbnail: "https://img.youtube.com/vi/9m-x64bKfR4/hqdefault.jpg", // Updated to match video ID
+      videoUrl: "https://youtu.be/9m-x64bKfR4?si=a1He4kT5T43n-wWB"
+    },
+    {
+      title: "How to Defend Against Common Attacks",
+      instructor: "Alicia Rodriguez",
+      duration: "9 mins",
+      thumbnail: "https://img.youtube.com/vi/SfAoGd7Ej6E/hqdefault.jpg",
+      videoUrl: "https://youtu.be/q1pBBRi3XF8?si=HiRrzuQMUUMypXV6"
+    }
   ];
 
   return (
@@ -218,7 +252,12 @@ const Safety = () => {
               <h2>Self-Defense Tutorials</h2>
               <div className="videos-grid">
                 {selfDefenseVideos.map((video, index) => (
-                  <div key={index} className="video-card">
+                  <div 
+                    key={index} 
+                    className="video-card"
+                    onClick={() => window.open(video.videoUrl, '_blank')}
+                    style={{ cursor: 'pointer' }}
+                  >
                     <div className="video-thumbnail">
                       <img src={video.thumbnail} alt={video.title} />
                       <div className="play-button">
@@ -234,7 +273,7 @@ const Safety = () => {
                 ))}
               </div>
             </div>
-
+            
             <div className="safety-tips">
               <h2>Personal Safety Tips</h2>
               <div className="tips-grid">

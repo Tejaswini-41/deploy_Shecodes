@@ -52,47 +52,106 @@ const Leadership = () => {
 
   const leadershipPrograms = [
     {
-      title: "Executive Leadership Workshop",
-      duration: "6 weeks",
+      title: "Katalyst India Leadership Program",
+      description: "Transforming women from low-income communities into professionals through education, training, and mentorship.",
+      duration: "4 years (undergraduate support)",
       format: "Hybrid",
-      startDate: "April 15, 2024",
+      startDate: "June 15, 2024",
+      eligibility: "Female students from low-income families pursuing STEM education",
       topics: [
-        "Strategic Thinking",
-        "Team Management",
-        "Communication Skills",
-        "Decision Making"
+        "Professional Development",
+        "Personality Development",
+        "Technical Skills Enhancement",
+        "Industry Exposure"
       ],
-      mentor: "Dr. Priya Sharma"
+      mentor: "Katalyst India Faculty",
+      website: "https://www.katalystindia.org/",
+      logo: "https://katalystindia.org/wp-content/uploads/2022/08/Katalyst-New-Logo.png"
     },
     {
-      title: "Women in Tech Leadership",
-      duration: "8 weeks",
-      format: "Online",
-      startDate: "May 1, 2024",
+      title: "Kiran Girls Scholarship Program",
+      description: "Supporting talented girls from economically disadvantaged backgrounds to pursue higher education.",
+      duration: "Entire degree duration",
+      format: "Financial Support & Mentoring",
+      startDate: "Applications open April 1, 2024",
+      eligibility: "Girl students with excellent academic records and financial need",
+      topics: [
+        "Financial Support for Education",
+        "Career Guidance",
+        "Personal Development",
+        "Leadership Training"
+      ],
+      mentor: "Persistance Systems Mentors",
+      website: "https://www.persistentfoundation.org/work/education/kiran-girls-scholarship-and-mentoring-program/scholarship-program-details/",
+      logo: "https://www.persistentfoundation.org/wp-content/uploads/2024/08/persistent-foundation-15-year-logo.svg"
+    },
+    {
+      title: "Women in Tech Leadership Academy",
+      description: "Empowering women professionals to take on leadership roles in the technology sector.",
+      duration: "12 weeks",
+      format: "Online with weekend workshops",
+      startDate: "May 10, 2024",
+      eligibility: "Women with 3+ years experience in tech industry",
       topics: [
         "Technical Leadership",
-        "Project Management",
-        "Innovation Strategy",
-        "Career Growth"
+        "Strategic Decision Making",
+        "Building High-Performance Teams",
+        "Navigating Gender Bias in Tech"
       ],
-      mentor: "Sarah Chen"
-    }
-  ];
-
-  const resources = [
-    {
-      title: "Personal Brand Building",
-      type: "Workshop",
-      date: "March 30, 2024",
-      instructor: "Maya Patel",
-      image: "/Images/workshops/personal-brand.jpg"
+      mentor: "Industry Leaders from Google, Microsoft, and Amazon",
+      website: "https://wit-ace.com/lead-program/",
+      logo: "https://women-in-tech.org/wp-content/uploads/2023/12/womenintech-logo-2024.png"
     },
     {
-      title: "Negotiation Skills",
-      type: "Masterclass",
-      date: "April 5, 2024",
-      instructor: "Lisa Wong",
-      image: "/Images/workshops/negotiation.jpg"
+      title: "TechWomen Rising Stars Program",
+      description: "Accelerating the careers of women in technology through skill development and mentorship.",
+      duration: "6 months",
+      format: "Virtual Learning & Networking",
+      startDate: "July 1, 2024",
+      eligibility: "Early to mid-career women in technology fields",
+      topics: [
+        "Technical Skill Enhancement",
+        "Career Navigation Strategies",
+        "Building Professional Network",
+        "Public Speaking and Presentation Skills"
+      ],
+      mentor: "Senior Women Leaders from Tech Industry",
+      website: "https://anitab.org/our-programs/",
+      logo: "https://anitab.org/wp-content/uploads/2022/08/AnitaB-logo.png"
+    },
+    {
+      title: "SHEROES Leadership Accelerator",
+      description: "India's women-only community platform offering leadership development for aspiring women leaders.",
+      duration: "8 weeks",
+      format: "Online Cohort-based",
+      startDate: "April 20, 2024",
+      eligibility: "Women professionals with 2+ years of work experience",
+      topics: [
+        "Personal Branding",
+        "Communication and Influence",
+        "Financial Leadership",
+        "Work-Life Integration"
+      ],
+      mentor: "SHEROES Community Leaders",
+      website: "https://sheroes.com/",
+      logo: "https://img.sheroes.in/img/uploads/sheroespage/logoes/1654152493sheroes-logo-red.png"
+    },
+    {
+      title: "NSR Foundation Women's Leadership Fellowship",
+      description: "Supporting women from underrepresented backgrounds to become future leaders through education and mentorship.",
+      duration: "1 year",
+      format: "Hybrid with residential components",
+      startDate: "August 15, 2024",
+      eligibility: "Undergraduate women students from tier-2/3 cities",
+      topics: [
+        "Project Management",
+        "Community Leadership",
+        "Social Impact Assessment",
+        "Fundraising and Resource Mobilization"
+      ],
+      mentor: "Dr. Ranjana Kumar & NSR Foundation Team",
+      website: "https://www.nsrfoundation.org/",
+      logo: "https://www.nsrfoundation.org/wp-content/themes/nsr-foundation/images/logo.png"
     }
   ];
 
@@ -117,12 +176,6 @@ const Leadership = () => {
             onClick={() => setActiveTab('programs')}
           >
             Leadership Programs
-          </button>
-          <button 
-            className={`nav-btn ${activeTab === 'resources' ? 'active' : ''}`}
-            onClick={() => setActiveTab('resources')}
-          >
-            Resources
           </button>
         </div>
 
@@ -157,51 +210,60 @@ const Leadership = () => {
         {activeTab === 'programs' && (
           <section className="leadership-programs">
             <h2>Leadership Development Programs</h2>
+            <p className="section-description">
+              Explore these opportunities to develop your leadership skills and advance your career
+            </p>
+            
             <div className="programs-grid">
               {leadershipPrograms.map((program, index) => (
                 <div key={index} className="program-card">
                   <div className="program-header">
+                    <div className="program-logo">
+                      {program.logo && (
+                        <img 
+                          src={program.logo} 
+                          alt={`${program.title} logo`} 
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = "/logo-placeholder.png"; // Add a placeholder image to your public folder
+                            e.target.style.opacity = "0.7";
+                          }}
+                        />
+                      )}
+                    </div>
                     <h3>{program.title}</h3>
                     <span className="program-format">{program.format}</span>
                   </div>
                   <div className="program-details">
-                    <p><i className="far fa-clock"></i> {program.duration}</p>
-                    <p><i className="far fa-calendar"></i> Starts {program.startDate}</p>
-                    <p><i className="fas fa-chalkboard-teacher"></i> Mentor: {program.mentor}</p>
+                    <p className="program-description">{program.description}</p>
+                    <div className="program-info">
+                      <p><i className="far fa-clock"></i> {program.duration}</p>
+                      <p><i className="far fa-calendar"></i> Starts {program.startDate}</p>
+                      <p><i className="fas fa-user-check"></i> Eligibility: {program.eligibility}</p>
+                      <p><i className="fas fa-chalkboard-teacher"></i> Mentors: {program.mentor}</p>
+                    </div>
                     <div className="program-topics">
-                      <h4>Key Topics</h4>
+                      <h4>Key Focus Areas</h4>
                       <ul>
                         {program.topics.map((topic, i) => (
-                          <li key={i}>{topic}</li>
+                          <li key={i}><i className="fas fa-check-circle"></i> {topic}</li>
                         ))}
                       </ul>
                     </div>
-                    <button className="enroll-btn">Apply Now</button>
+                    <div className="program-actions">
+                      <a href={program.website} target="_blank" rel="noopener noreferrer" className="visit-site-btn">
+                        <i className="fas fa-external-link-alt"></i> Visit Website
+                      </a>
+                      <button className="enroll-btn">Apply Now</button>
+                    </div>
                   </div>
                 </div>
               ))}
             </div>
-          </section>
-        )}
-
-        {activeTab === 'resources' && (
-          <section className="leadership-resources">
-            <h2>Leadership Resources</h2>
-            <div className="resources-grid">
-              {resources.map((resource, index) => (
-                <div key={index} className="resource-card">
-                  <div className="resource-image">
-                    <img src={resource.image} alt={resource.title} />
-                    <span className="resource-type">{resource.type}</span>
-                  </div>
-                  <div className="resource-info">
-                    <h3>{resource.title}</h3>
-                    <p><i className="far fa-calendar"></i> {resource.date}</p>
-                    <p><i className="fas fa-user"></i> {resource.instructor}</p>
-                    <button className="register-btn">Register Now</button>
-                  </div>
-                </div>
-              ))}
+            
+            <div className="programs-note">
+              <h3><i className="fas fa-lightbulb"></i> Looking for more opportunities?</h3>
+              <p>These programs are updated regularly. Check back often or join our network to get notified about new leadership opportunities.</p>
             </div>
           </section>
         )}

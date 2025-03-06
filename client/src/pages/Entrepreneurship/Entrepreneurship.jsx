@@ -6,23 +6,6 @@ import './Entrepreneurship.css';
 const Entrepreneurship = () => {
   const [activeTab, setActiveTab] = useState('resources');
 
-  const resources = [
-    {
-      title: "Business Plan Template",
-      type: "Template",
-      description: "Comprehensive business plan template with financial projections",
-      downloads: 1200,
-      icon: "fas fa-file-alt"
-    },
-    {
-      title: "Funding Guide 2024",
-      type: "Guide",
-      description: "Complete guide to securing funding for women entrepreneurs",
-      downloads: 850,
-      icon: "fas fa-book"
-    }
-  ];
-
   const mentors = [
     {
       name: "Indra Nooyi",

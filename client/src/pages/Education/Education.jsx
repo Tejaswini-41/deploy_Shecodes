@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
 import { workshops } from '../../data/workshops';
 import './Education.css';
 
 const Education = () => {
+  // State for filtering and sorting
+  const [searchQuery, setSearchQuery] = useState('');
+  const [activeCategory, setActiveCategory] = useState('All');
+  const [sortBy, setSortBy] = useState('popularity'); // Default sort by popularity
+  const [filteredCourses, setFilteredCourses] = useState([]);
+
   const courses = [
     {
       title: "Web Development",
@@ -88,6 +94,64 @@ const Education = () => {
     }
   ];
 
+  // Get unique categories for filter buttons
+  const categories = ['All', ...new Set(courses.map(course => course.category))];
+
+  // Filter and sort courses when dependencies change
+  useEffect(() => {
+    let results = [...courses];
+    
+    // Filter by search query
+    if (searchQuery) {
+      results = results.filter(course => 
+        course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        course.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        course.level.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+    
+    // Filter by category
+    if (activeCategory !== 'All') {
+      results = results.filter(course => course.category === activeCategory);
+    }
+    
+    // Sort courses
+    switch (sortBy) {
+      case 'rating':
+        results.sort((a, b) => b.rating - a.rating);
+        break;
+      case 'popularity':
+        results.sort((a, b) => b.enrolled - a.enrolled);
+        break;
+      case 'durationAsc':
+        results.sort((a, b) => parseInt(a.duration) - parseInt(b.duration));
+        break;
+      case 'durationDesc':
+        results.sort((a, b) => parseInt(b.duration) - parseInt(a.duration));
+        break;
+      default:
+        // Default sort by popularity
+        results.sort((a, b) => b.enrolled - a.enrolled);
+    }
+    
+    setFilteredCourses(results);
+  }, [searchQuery, activeCategory, sortBy]);
+
+  // Handle search input change
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  // Handle category filter click
+  const handleCategoryFilter = (category) => {
+    setActiveCategory(category);
+  };
+
+  // Handle sort option change
+  const handleSortChange = (e) => {
+    setSortBy(e.target.value);
+  };
+
   return (
     <div className="education-container">
       <Navbar />
@@ -98,40 +162,91 @@ const Education = () => {
         </div>
 
         <section className="course-filters">
-          <input type="text" placeholder="Search courses..." className="search-input" />
+          <div className="filter-row">
+            <input 
+              type="text" 
+              placeholder="Search courses..." 
+              className="search-input"
+              value={searchQuery}
+              onChange={handleSearchChange} 
+            />
+            
+            <div className="sort-container">
+              <label htmlFor="sort-select">Sort by:</label>
+              <select 
+                id="sort-select" 
+                value={sortBy} 
+                onChange={handleSortChange}
+                className="sort-select"
+              >
+                <option value="popularity">Most Popular</option>
+                <option value="rating">Highest Rated</option>
+                <option value="durationAsc">Duration (Shortest First)</option>
+                <option value="durationDesc">Duration (Longest First)</option>
+              </select>
+            </div>
+          </div>
+
           <div className="filter-buttons">
-            <button className="filter-btn active">All</button>
-            <button className="filter-btn">Technology</button>
-            <button className="filter-btn">Business</button>
-            <button className="filter-btn">Leadership</button>
-            <button className="filter-btn">Finance</button>
+            {categories.map(category => (
+              <button 
+                key={category}
+                className={`filter-btn ${activeCategory === category ? 'active' : ''}`}
+                onClick={() => handleCategoryFilter(category)}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+          
+          <div className="filter-results">
+            <p>Showing {filteredCourses.length} courses</p>
+            {(searchQuery || activeCategory !== 'All') && (
+              <button 
+                className="clear-filters-btn"
+                onClick={() => {
+                  setSearchQuery('');
+                  setActiveCategory('All');
+                }}
+              >
+                <i className="fas fa-times"></i> Clear Filters
+              </button>
+            )}
           </div>
         </section>
 
         <section className="courses-section">
           <h2>Featured Courses</h2>
-          <div className="courses-grid">
-            {courses.map((course, index) => (
-              <div key={index} className="course-card">
-                <div className="course-image">
-                  <img src={course.image} alt={course.title} />
-                  <span className="course-level">{course.level}</span>
-                </div>
-                <div className="course-content">
-                  <span className="course-category">{course.category}</span>
-                  <h3>{course.title}</h3>
-                  <div className="course-info">
-                    <span><i className="far fa-clock"></i> {course.duration}</span>
-                    <span><i className="fas fa-star"></i> {course.rating}</span>
-                    <span><i className="fas fa-users"></i> {course.enrolled}</span>
+          {filteredCourses.length > 0 ? (
+            <div className="courses-grid">
+              {filteredCourses.map((course, index) => (
+                <div key={index} className="course-card">
+                  <div className="course-image">
+                    <img src={course.image} alt={course.title} />
+                    <span className="course-level">{course.level}</span>
                   </div>
-                  <button className="enroll-btn" onClick={() => window.open(course.url, '_blank')}>
-                    Enroll Now
-                  </button>
+                  <div className="course-content">
+                    <span className="course-category">{course.category}</span>
+                    <h3>{course.title}</h3>
+                    <div className="course-info">
+                      <span><i className="far fa-clock"></i> {course.duration}</span>
+                      <span><i className="fas fa-star"></i> {course.rating}</span>
+                      <span><i className="fas fa-users"></i> {course.enrolled}</span>
+                    </div>
+                    <button className="enroll-btn" onClick={() => window.open(course.url, '_blank')}>
+                      Enroll Now
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <div className="no-results">
+              <i className="fas fa-search"></i>
+              <h3>No courses found</h3>
+              <p>Try adjusting your filters or search term</p>
+            </div>
+          )}
         </section>
 
         <section className="workshops-section">

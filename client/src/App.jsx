@@ -14,7 +14,6 @@ import Safety from './pages/Safety/Safety';
 import Leadership from './pages/Leadership/Leadership';
 import Contact from './pages/Contact/Contact';
 import Finance from './pages/Finance/Finance';
-import Admin from './pages/Admin/Admin';
 
 function App() {
   return (

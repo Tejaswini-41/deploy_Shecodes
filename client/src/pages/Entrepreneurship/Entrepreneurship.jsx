@@ -28,7 +28,7 @@ const Entrepreneurship = () => {
       title: "Women Entrepreneurs Fund",
       organization: "Global Impact Ventures",
       amount: "$50,000",
-      deadline: "April 30, 2024",
+      deadline: "April 30, 2025",
       type: "Grant",
       eligibility: ["Women-owned business", "Tech startups", "Early-stage"],
       link: "https://opportunitiesforyouth.org/2023/09/24/funding-opportunities-for-organizations-interested-in-making-a-meaningful-impact/"
@@ -37,7 +37,7 @@ const Entrepreneurship = () => {
       title: "Startup Accelerator Program",
       organization: "TechStars Women",
       amount: "$120,000",
-      deadline: "May 15, 2024",
+      deadline: "May 15, 2025",
       type: "Investment",
       eligibility: ["Tech startups", "Female founders", "MVP ready"],
       link: "https://www.startupindia.gov.in/content/sih/en/women_entrepreneurs.html"
@@ -46,7 +46,7 @@ const Entrepreneurship = () => {
       title: "DPIIT Women Entrepreneurship Program",
       organization: "Startup India",
       amount: "₹5,00,000",
-      deadline: "June 30, 2024",
+      deadline: "June 30, 2025",
       type: "Grant",
       eligibility: ["Indian Women Entrepreneurs", "Registered Business", "Innovation Focus"],
       link: "https://www.startupindia.gov.in/content/sih/en/government-schemes.html"
@@ -55,7 +55,7 @@ const Entrepreneurship = () => {
       title: "NITI Aayog Women Transform",
       organization: "Government of India",
       amount: "₹10,00,000",
-      deadline: "July 15, 2024",
+      deadline: "July 15, 2025",
       type: "Grant + Mentorship",
       eligibility: ["Women-led startups", "Social Impact", "Technology Focus"],
       link: "https://wep.gov.in/"

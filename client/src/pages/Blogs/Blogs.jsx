@@ -1,28 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import Navbar from '../../components/Navbar/Navbar';
-import Footer from '../../components/Footer/Footer';
-import './Blogs.css';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Navbar from "../../components/Navbar/Navbar";
+import Footer from "../../components/Footer/Footer";
+import "./Blogs.css";
 
-const API_URL = 'http://localhost:5000/api/blogs';
+const API_URL = "http://54.167.8.61:3000/api/blogs";
 
 const Blogs = () => {
-  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedCategory, setSelectedCategory] = useState("all");
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [showPostForm, setShowPostForm] = useState(false);
   const [blogForm, setBlogForm] = useState({
-    title: '',
-    content: '',
-    author: '',
-    category: 'tech',
-    excerpt: '',
-    image: ''
+    title: "",
+    content: "",
+    author: "",
+    category: "tech",
+    excerpt: "",
+    image: "",
   });
 
   const categories = [
-    'all', 'success-stories', 'tech', 'career', 'leadership', 'wellness'
+    "all",
+    "success-stories",
+    "tech",
+    "career",
+    "leadership",
+    "wellness",
   ];
 
   // Fetch blogs when component mounts or category changes
@@ -34,13 +39,15 @@ const Blogs = () => {
     try {
       setLoading(true);
       setError(null);
-      console.log('Fetching blogs for category:', selectedCategory);
-      
-      const response = await axios.get(`${API_URL}?category=${selectedCategory}`);
-      console.log('Blogs fetched successfully:', response.data);
+      console.log("Fetching blogs for category:", selectedCategory);
+
+      const response = await axios.get(
+        `${API_URL}?category=${selectedCategory}`
+      );
+      console.log("Blogs fetched successfully:", response.data);
       setBlogs(response.data);
     } catch (err) {
-      console.error('Error details:', err);
+      console.error("Error details:", err);
       setError(err.response?.data?.message);
     } finally {
       setLoading(false);
@@ -49,9 +56,9 @@ const Blogs = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setBlogForm(prev => ({
+    setBlogForm((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -60,19 +67,19 @@ const Blogs = () => {
     try {
       setLoading(true);
       const response = await axios.post(API_URL, blogForm);
-      setBlogs(prev => [response.data, ...prev]);
+      setBlogs((prev) => [response.data, ...prev]);
       setShowPostForm(false);
       setBlogForm({
-        title: '',
-        content: '',
-        author: '',
-        category: 'tech',
-        excerpt: '',
-        image: ''
+        title: "",
+        content: "",
+        author: "",
+        category: "tech",
+        excerpt: "",
+        image: "",
       });
     } catch (err) {
-      setError('Failed to post blog');
-      console.error('Error posting blog:', err);
+      setError("Failed to post blog");
+      console.error("Error posting blog:", err);
     } finally {
       setLoading(false);
     }
@@ -84,7 +91,9 @@ const Blogs = () => {
       <div className="blogs-page">
         <div className="blogs-hero">
           <h1>Stories That Inspire</h1>
-          <p>Discover success stories, insights, and knowledge from women leaders</p>
+          <p>
+            Discover success stories, insights, and knowledge from women leaders
+          </p>
         </div>
 
         <section className="blog-filters">
@@ -92,10 +101,12 @@ const Blogs = () => {
             {categories.map((category) => (
               <button
                 key={category}
-                className={`category-btn ${selectedCategory === category ? 'active' : ''}`}
+                className={`category-btn ${
+                  selectedCategory === category ? "active" : ""
+                }`}
                 onClick={() => setSelectedCategory(category)}
               >
-                {category.split('-').join(' ')}
+                {category.split("-").join(" ")}
               </button>
             ))}
           </div>
@@ -105,7 +116,7 @@ const Blogs = () => {
           <div className="write-blog-content">
             <h2>Share Your Story</h2>
             <p>Inspire others by sharing your experiences and insights</p>
-            <button 
+            <button
               className="write-blog-btn"
               onClick={() => setShowPostForm(true)}
             >
@@ -137,11 +148,13 @@ const Blogs = () => {
                     onChange={handleInputChange}
                     required
                   >
-                    {categories.filter(cat => cat !== 'all').map(category => (
-                      <option key={category} value={category}>
-                        {category.split('-').join(' ')}
-                      </option>
-                    ))}
+                    {categories
+                      .filter((cat) => cat !== "all")
+                      .map((category) => (
+                        <option key={category} value={category}>
+                          {category.split("-").join(" ")}
+                        </option>
+                      ))}
                   </select>
                 </div>
                 <div className="form-group">
@@ -188,7 +201,7 @@ const Blogs = () => {
                     Cancel
                   </button>
                   <button type="submit" disabled={loading}>
-                    {loading ? 'Posting...' : 'Post Blog'}
+                    {loading ? "Posting..." : "Post Blog"}
                   </button>
                 </div>
               </form>
@@ -203,7 +216,10 @@ const Blogs = () => {
           {blogs.map((blog, index) => (
             <article key={index} className="blog-card">
               <div className="blog-image">
-                <img src={blog.image || '/Images/blogs/default.jpg'} alt={blog.title} />
+                <img
+                  src={blog.image || "/Images/blogs/default.jpg"}
+                  alt={blog.title}
+                />
                 <span className="category-tag">{blog.category}</span>
               </div>
               <div className="blog-content">
@@ -211,7 +227,10 @@ const Blogs = () => {
                 <p>{blog.excerpt}</p>
                 <div className="blog-meta">
                   <div className="author-info">
-                    <img src={blog.authorImg || '/Images/authors/default.jpg'} alt={blog.author} />
+                    <img
+                      src={blog.authorImg || "/Images/authors/default.jpg"}
+                      alt={blog.author}
+                    />
                     <span>{blog.author}</span>
                   </div>
                   <div className="post-info">

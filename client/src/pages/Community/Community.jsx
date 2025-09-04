@@ -4,8 +4,8 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import "./Community.css";
 
-const EVENT_API_URL = "http://localhost:5000/api/events";
-const MENTOR_API_URL = "http://localhost:5000/api/mentors";
+const EVENT_API_URL = "http://54.167.8.61:3000/api/events";
+const MENTOR_API_URL = "http://54.167.8.61:3000/api/mentors";
 
 const Community = () => {
   const [activeTab, setActiveTab] = useState("discussions");

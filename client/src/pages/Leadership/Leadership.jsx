@@ -21,7 +21,7 @@ const Leadership = () => {
     {
       name: "Tejaswini Durge",
       role: "Student at VIIT",
-      image: "https://media.licdn.com/dms/image/v2/D4D22AQE3t-Ga8sfKYA/feedshare-shrink_800/B4DZVVK5tBGcAg-/0/1740890726030?e=1744243200&v=beta&t=47heRQ2TDbDXqtCXFJ53_zHMsf_cGNUIBvR_MNrq20k",
+      image: "https://media.licdn.com/dms/image/v2/D4D03AQE_19-gG_hBPg/profile-displayphoto-shrink_800_800/B4DZauGUBTHQAc-/0/1746677621606?e=1755129600&v=beta&t=zkvnquJ6NPUVoy1O1YjHIpGN9C8ugpbWrj5P2gg552Y",
       quote: "Leadership is not about being in charge. It is about taking care of those in your charge.",
       achievements: [
         "Batch Representative",

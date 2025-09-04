@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import './Navbar.css';
-import ProfileModal from '../ProfileModal/ProfileModal';
+import React, { useState, useRef, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import "./Navbar.css";
+import ProfileModal from "../ProfileModal/ProfileModal";
 
 const Navbar = () => {
   const [showProfileModal, setShowProfileModal] = useState(false);
@@ -19,16 +19,20 @@ const Navbar = () => {
     { to: "/dashboard/safety", label: "Safety", icon: "fa-shield-alt" },
     { to: "/dashboard/leadership", label: "Lead", icon: "fa-users" },
     { to: "/dashboard/community", label: "Community", icon: "fa-comments" },
-    { to: "/dashboard/blogs", label: "Blogs", icon: "fa-pen-fancy" }
+    { to: "/dashboard/blogs", label: "Blogs", icon: "fa-pen-fancy" },
   ];
-  
+
   // More dropdown links
   const moreLinks = [
     { to: "/dashboard/tech", label: "Tech", icon: "fa-laptop-code" },
     { to: "/dashboard/health", label: "Health", icon: "fa-heartbeat" },
-    { to: "/dashboard/entrepreneurship", label: "Business", icon: "fa-briefcase" }
+    {
+      to: "/dashboard/entrepreneurship",
+      label: "Business",
+      icon: "fa-briefcase",
+    },
   ];
-  
+
   // Helper to check if a link is active
   const isActive = (path) => {
     return location.pathname === path;
@@ -36,7 +40,7 @@ const Navbar = () => {
 
   // Check if any link in more dropdown is active
   const isMoreActive = () => {
-    return moreLinks.some(link => isActive(link.to));
+    return moreLinks.some((link) => isActive(link.to));
   };
 
   const handleProfileClick = (e) => {
@@ -56,7 +60,10 @@ const Navbar = () => {
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (moreDropdownRef.current && !moreDropdownRef.current.contains(event.target)) {
+      if (
+        moreDropdownRef.current &&
+        !moreDropdownRef.current.contains(event.target)
+      ) {
         setShowMoreDropdown(false);
       }
     };
@@ -72,24 +79,28 @@ const Navbar = () => {
       <nav className="navbar">
         <div className="nav-brand">
           <Link to="/dashboard">
-            <img src="/Images/logo.png" alt="EmpowerHer Logo" className="brand-logo" />
+            <img
+              src="/Images/logo.png"
+              alt="EmpowerHer Logo"
+              className="brand-logo"
+            />
             <span className="brand-text">EmpowerHer</span>
           </Link>
         </div>
 
         {/* Mobile menu toggle */}
         <button className="mobile-menu-toggle" onClick={toggleMobileMenu}>
-          <i className={`fas ${isMobileMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
+          <i className={`fas ${isMobileMenuOpen ? "fa-times" : "fa-bars"}`}></i>
         </button>
-        
+
         {/* Main navigation links - desktop */}
-        <div className={`nav-container ${isMobileMenuOpen ? 'active' : ''}`}>
+        <div className={`nav-container ${isMobileMenuOpen ? "active" : ""}`}>
           <ul className="nav-links">
             {mainLinks.map((link, index) => (
               <li key={index}>
-                <Link 
-                  to={link.to} 
-                  className={isActive(link.to) ? 'active' : ''}
+                <Link
+                  to={link.to}
+                  className={isActive(link.to) ? "active" : ""}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   <i className={`fas ${link.icon}`}></i>
@@ -98,7 +109,10 @@ const Navbar = () => {
               </li>
             ))}
             <li className="more-dropdown" ref={moreDropdownRef}>
-              <button onClick={toggleMoreDropdown} className={isMoreActive() ? 'active' : ''}>
+              <button
+                onClick={toggleMoreDropdown}
+                className={isMoreActive() ? "active" : ""}
+              >
                 <i className="fas fa-ellipsis-h"></i>
                 <span>More</span>
               </button>
@@ -106,9 +120,9 @@ const Navbar = () => {
                 <ul className="dropdown-menu">
                   {moreLinks.map((link, index) => (
                     <li key={index}>
-                      <Link 
-                        to={link.to} 
-                        className={isActive(link.to) ? 'active' : ''}
+                      <Link
+                        to={link.to}
+                        className={isActive(link.to) ? "active" : ""}
                         onClick={() => {
                           setIsMobileMenuOpen(false);
                           setShowMoreDropdown(false);
@@ -123,7 +137,7 @@ const Navbar = () => {
               )}
             </li>
           </ul>
-          
+
           <div className="nav-actions">
             <button className="search-btn">
               <i className="fas fa-search"></i>
@@ -134,10 +148,10 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-      
-      <ProfileModal 
-        isOpen={showProfileModal} 
-        onClose={() => setShowProfileModal(false)} 
+
+      <ProfileModal
+        isOpen={showProfileModal}
+        onClose={() => setShowProfileModal(false)}
       />
     </>
   );

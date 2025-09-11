@@ -24,7 +24,7 @@ services:
       - ./.env
     networks:
       - sheCodes-network
-
+  
 networks:
   sheCodes-network:
     driver: bridge

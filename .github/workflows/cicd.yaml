@@ -63,11 +63,48 @@ jobs:
           # Create a deployment script locally
           cat > deploy.sh << 'EOFSCRIPT'
           #!/bin/bash
+          set -e
+
+          # Setup logging
+          exec > >(tee -a ~/deployment.log) 2>&1
+          echo "Starting deployment at $(date)"
+
+          # Install Docker for Amazon Linux 2023 if not present
+          if ! command -v docker &> /dev/null; then
+            echo "Installing Docker for Amazon Linux 2023..."
+            sudo yum update -y
+            sudo yum install docker -y
+            sudo systemctl start docker
+            sudo systemctl enable docker
+            sudo usermod -aG docker $USER
+            echo "Docker installed successfully"
+          else
+            echo "Docker already installed"
+          fi
+
+          # Use Docker Compose through Docker directly
+          # This avoids the library dependency issues with the binary version
+          echo "Setting up Docker Compose through Docker..."
+          
+          # Create a script to run docker-compose as a container
+          cat > ~/docker-compose << 'EOF'
+          #!/bin/bash
+          docker run --rm \
+            -v /var/run/docker.sock:/var/run/docker.sock \
+            -v "$PWD:$PWD" \
+            -w="$PWD" \
+            docker/compose:1.29.2 "$@"
+          EOF
+          
+          sudo chmod +x ~/docker-compose
+          sudo mv ~/docker-compose /usr/local/bin/docker-compose
+          echo "Docker Compose setup completed"
           
           # Create docker-compose.yml
           mkdir -p ~/shecodes
           cd ~/shecodes
           
+          echo "Creating docker-compose.yml..."
           cat > docker-compose.yml << COMPOSE
           version: "3"
           services:
@@ -96,13 +133,26 @@ jobs:
               driver: bridge
           COMPOSE
           
+          echo "Logging in to Docker Hub..."
           # Login to Docker, deploy
           echo "${DOCKERHUB_TOKEN}" | docker login -u ${DOCKERHUB_USERNAME} --password-stdin
+          
+          echo "Pulling latest images..."
           docker-compose pull
-          docker-compose down
+          
+          echo "Stopping existing containers..."
+          docker-compose down || true
+          
+          echo "Starting containers..."
           docker-compose up -d
+          
+          echo "Cleaning up unused Docker resources..."
           docker system prune -af
+          
+          echo "Logging out from Docker Hub..."
           docker logout
+          
+          echo "Deployment completed successfully at $(date)"
           EOFSCRIPT
           
           # Make the script executable

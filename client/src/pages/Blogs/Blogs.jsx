@@ -4,7 +4,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import "./Blogs.css";
 
-const API_URL = "http://54.167.8.61/api/blogs";
+const API_URL = "http://localhost:5000/api/blogs";
 
 const Blogs = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");

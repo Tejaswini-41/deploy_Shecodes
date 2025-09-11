@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const MENTOR_API_URL = "http://54.167.8.61/api/mentors";
+const MENTOR_API_URL = "http://localhost:5000/api/mentors";
 
 const Mentorship = () => {
   const [showMentorForm, setShowMentorForm] = useState(false);

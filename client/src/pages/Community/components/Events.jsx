@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const EVENT_API_URL = "http://54.167.8.61/api/events";
+const EVENT_API_URL = "http://localhost:5000/api/events";
 
 const Events = () => {
   const [showEventForm, setShowEventForm] = useState(false);
